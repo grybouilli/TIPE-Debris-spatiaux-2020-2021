@@ -1,0 +1,9 @@
+Ce qui est bien:
+
+-on est passionné et passionnant
+ 
+Ce qui est moins bien:
+
+-Bien définir la matière dominante du sujet (physique ou info)
+-Problématiser de manière à ancrer le sujet dans une démarche scientifique et que le tipe ait pas seulement l'air d'un projet robotique
+ -> trouver des modèles physiques qui illustrent chaque problème (équations ++)
