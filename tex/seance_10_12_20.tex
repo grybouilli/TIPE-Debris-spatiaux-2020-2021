@@ -7,6 +7,9 @@
 \usepackage{microtype}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{graphicx}
+
+\graphicspath{{/home/grybouilli/TIPE/schema/}}
 
 \title{TIPE 2020/2021 : \\ Débris Spatiaux}
 \date{12 octobre 2020}
@@ -14,7 +17,7 @@
 \begin{document}
 \maketitle
 
-Objectifs :
+\section*{Objectifs}
 \begin{itemize}
     \item Recherches : 
     \begin{itemize}
@@ -33,5 +36,18 @@ Objectifs :
     \end{itemize}
        
 \end{itemize}
+
+\section*{Cours sur le solénoide}
+On considère un solénoide de longueur $L$ de $N$ spires. On note $n$ le nombre de spires par unité de longueur:
+$$n= \frac{N}{L}$$
+Pour une petite longueur d$z$, on note aussi:
+$$N'=n\mathrm{d}z$$
+\\
+\textbf{Champ élémentaire créé sur le point M}
+\begin{figure}[h]
+    \includegraphics[scale=0.5]{solenoide_fini.PNG}
+\end{figure}
+
+$$\mathrm{d} \overset{\to}{B}(M) = n\mathrm{d}z\, \frac{\mu_0 I}{2 R} \sin^3(\theta) \overset{\to}{e_z}$$
 
 \end{document}
