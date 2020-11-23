@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+import math
 #Rayon du solénoïde (m):
 a = 5
 #Intensité du courant dans les filaments (A):
@@ -34,6 +35,9 @@ class Vecteur:
     def set_z(self,z1):
         self.z = z1
 
+    def __add__(self, other):
+        return Vecteur(self.x+other.get_x(), self.y+other.get_y(), self.z+other.get_z())
+
 def prod_scal(vect1,vect2):
     (x1,x2) = (vect1.get_x(),vect2.get_x())
     (y1,y2) = (vect1.get_y(),vect2.get_y())
@@ -47,4 +51,10 @@ def prod_vec(vec1, vec2):
 
     return Vecteur(y1*z2-y2*z1, z1*x2-x1*z2, y2*x1-y1*x2)
     
+def polar_of_cart(vec):
+    r = np.sqrt(vec.get_x()**2 + vec.get_y()**2)
+    if r = 0:
+        return Vecteur(0,0,0)
+    return Vecteur(r, np.arccos( vec.get_x() / r ),vec.get_z())
 
+    
