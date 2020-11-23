@@ -27,3 +27,10 @@ class Vecteur:
     def get_z(self):
         return(self.z)
 
+    def set_r(self,r1):
+        self.r = r1
+    def set_theta(self,theta1):
+        self.theta = theta1
+    def set_z(self,z1):
+        self.z = z1
+
