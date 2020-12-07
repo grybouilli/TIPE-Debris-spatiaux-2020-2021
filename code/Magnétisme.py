@@ -13,8 +13,6 @@ n = 0
 #Perméabilité du vide (m.kg.s**(-2).A**(-2)):
 mu0 = 1.25663706 * 10**(-6)
 
-print(mu0)
-
 class Vecteur:
     def __init__ (self,x,y,z):
         self.x = x
@@ -53,7 +51,7 @@ def prod_vec(vec1, vec2):
     
 def polar_of_cart(vec):
     r = np.sqrt(vec.get_x()**2 + vec.get_y()**2)
-    if r = 0:
+    if r == 0:
         return Vecteur(0,0,0)
     return Vecteur(r, np.arccos( vec.get_x() / r ),vec.get_z())
 
