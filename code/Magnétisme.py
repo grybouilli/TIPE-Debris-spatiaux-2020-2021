@@ -59,6 +59,7 @@ def polar_of_cart(vec):
         return Vecteur(0,0,0)
     return Vecteur(r, np.arccos( vec.get_x() / r ),vec.get_z())
 
+#Pour r qui se rapproche de 0:
 # Calcule la composante du champ magnétique selon r à un instant donné
 def Br(vec):
 
@@ -77,7 +78,6 @@ def Br(vec):
 def Bz(vec):
 
     pol = polar_of_cart(vec)
-    r = pol.get_x()
     a = mu0 * n * i / 2
     xip = pol.get_z() + L/2
     xim = pol.get_z() - L/2
@@ -86,3 +86,11 @@ def Bz(vec):
         return xi / np.sqrt(xi*xi + a*a)
     
     return a * (f(xip) - f(xim))
+
+test = Vecteur(2, 0, 2)
+
+#Renvoie le vecteur champ magnétique à un instant donné
+def calc_magn1(vec):
+    return Vecteur(Br(vec), 0, Bz(vec))
+
+print(calc_magn1(test))
