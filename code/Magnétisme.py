@@ -93,4 +93,20 @@ test = Vecteur(2, 0, 2)
 def calc_magn1(vec):
     return Vecteur(Br(vec), 0, Bz(vec))
 
-print(calc_magn1(test))
+
+# Dans le cas général (?)
+"Complete ellipitc integral, second kind : E(k) = E(pi/2, k)"
+
+def K(k):
+    n = 1000
+    a, b = 0, np.pi/4
+    x = np.linspace(a, b, n)
+    def f(theta):
+        return 1 / np.sqrt( 1 - k * np.sin(theta) * np.sin(theta))
+    y = f(x)
+    res = 0
+    for i in range(n-1):
+        res += (x[i+1] - x[i])/(2*n) * (y[i] + y[i+1])
+    return res * ()
+
+print(K(2))
