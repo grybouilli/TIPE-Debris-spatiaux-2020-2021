@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 import random
 import math
 #Rayon du solénoïde (m):
-a = 5
+a = 0.05
 #Intensité du courant dans les filaments (A):
-i = 0
+i = 5
 #Longueur du solénoïde (m):
-L = 0
+L = 1
 #Nombre de tour par mètre (tours.m*(-1)):
-n = 0
+n = 1000
 #Perméabilité du vide (m.kg.s**(-2).A**(-2)):
 mu0 = 1.25663706 * 10**(-6)
 
@@ -35,6 +35,10 @@ class Vecteur:
 
     def __add__(self, other):
         return Vecteur(self.x+other.get_x(), self.y+other.get_y(), self.z+other.get_z())
+    
+    def __str__(self):
+        return "Vecteur avec x = %s, y = %s, z = %s" % (self.get_x(), self.get_y(), self.get_z())
+    
 
 def prod_scal(vect1,vect2):
     (x1,x2) = (vect1.get_x(),vect2.get_x())
@@ -55,4 +59,30 @@ def polar_of_cart(vec):
         return Vecteur(0,0,0)
     return Vecteur(r, np.arccos( vec.get_x() / r ),vec.get_z())
 
+# Calcule la composante du champ magnétique selon r à un instant donné
+def Br(vec):
+
+    pol = polar_of_cart(vec)
+    r = pol.get_x()
+    a = mu0 * n * i / 4
+    xip = pol.get_z() + L/2
+    xim = pol.get_z() - L/2
+
+    def f(xi):
+        return a*a*r/((xi*xi + a*a)**(3/2))
     
+    return a * (f(xip) - f(xim))
+
+#Calcule la composante du champ magnétique selon z à un instant donné
+def Bz(vec):
+
+    pol = polar_of_cart(vec)
+    r = pol.get_x()
+    a = mu0 * n * i / 2
+    xip = pol.get_z() + L/2
+    xim = pol.get_z() - L/2
+
+    def f(xi):
+        return xi / np.sqrt(xi*xi + a*a)
+    
+    return a * (f(xip) - f(xim))
