@@ -31,7 +31,7 @@ def Br(vec):
     
     return a * (f(xip) - f(xim))
 
-#Calcule la composante du champ magnétique selon z à un instant donné
+# Calcule la composante du champ magnétique selon z à un instant donné
 def Bz(vec):
 
     pol = polar_of_cart(vec)
