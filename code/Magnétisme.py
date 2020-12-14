@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 import math
+from scipy.special import ellipk
 from utilities import *
 #Rayon du solénoïde (m):
 a = 0.05
@@ -51,16 +52,6 @@ def calc_magn1(vec):
 
 # Dans le cas général (?)
 "Complete ellipitc integral, second kind : E(k) = E(pi/2, k)"
-
-def K(k):
-    n = 1000
-    a, b = 0, np.pi/4
-    x = np.linspace(a, b, n)
-    def f(theta):
-        return 1 / np.sqrt( 1 - k * np.sin(theta) * np.sin(theta))
-    y = f(x)
-    res = 0
-    for i in range(n-1):
-        res += (x[i+1] - x[i])/(2*n) * (y[i] + y[i+1])
-    return res * ()
-
+#en utilisant scypi
+def K_int(k):
+    return ellipk([k**2])
