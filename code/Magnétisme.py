@@ -55,6 +55,10 @@ def Br(r,z):
 
     return c * np.sqrt(a/r) * (((2-k_pos) * K_int(np.sqrt(k_pos))/(2*np.sqrt(k_pos)) -  E_int(np.sqrt(k_pos)) / np.sqrt(k_pos) ) - ( (2-k_neg) * K_int(np.sqrt(k_neg))/(2*np.sqrt(k_neg)) -  E_int(np.sqrt(k_neg)) / np.sqrt(k_neg))) 
     
+def Bz(r,z):
+    c1 = (mu0 * n * i)/4
+    xip = z+L/2
+    xim = z-L/2
 #Renvoie le vecteur champ magnétique à un instant donné
 def calc_magn1(vec):
     return Vecteur(Br(vec), 0, Bz(vec))
