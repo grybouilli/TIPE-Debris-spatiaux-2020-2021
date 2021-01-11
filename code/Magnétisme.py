@@ -81,7 +81,7 @@ def E_int(k):
 def K_int(phi, k):
     K= np.zeros(len(k))
     for i in range(len(K)):
-        K[i] = ellipkinc([K[i]])
+        K[i] = ellipkinc([phi],[K[i]])
     return K
 
 
@@ -89,8 +89,7 @@ def K_int(phi, k):
 def E_int(phi, k):
     E = np.zeros(len(k))
     for i in range(len(E)):
-        E[i] = ellipeinc([E[i]])
+        E[i] = ellipeinc([phi],[E[i]])
     return E
 
 def Z_int(phi, k):
-    
