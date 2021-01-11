@@ -4,6 +4,8 @@ import random
 import math
 from scipy.special import ellipk
 from scipy.special import ellipe
+from scipy.special import ellipkinc
+from scipy.special import ellipeinc
 from utilities import *
 #Rayon du solénoïde (m):
 a = 2
@@ -70,7 +72,6 @@ def K_int(k):
         K[i] = ellipk([K[i]])
     return K
 
-
 #Complete ellipitc integral, second kind : E(k) = E(pi/2, k)
 def E_int(k):
     E = np.zeros(len(k))
@@ -78,7 +79,7 @@ def E_int(k):
         E[i] = ellipe([E[i]])
     return E
 
-def K_int(phi, k):
+def K_int2(phi, k):
     K= np.zeros(len(k))
     for i in range(len(K)):
         K[i] = ellipkinc([phi],[K[i]])
@@ -86,11 +87,15 @@ def K_int(phi, k):
 
 
 #Complete ellipitc integral, second kind : E(k) = E(pi/2, k)
-def E_int(phi, k):
+def E_int2(phi, k):
     E = np.zeros(len(k))
     for i in range(len(E)):
         E[i] = ellipeinc([phi],[E[i]])
     return E
 
 def Z_int(phi, k):
-    return E_int(phi,k) - (K_int(phi,k) * E_int(k)) / K_int(k)
+    return E_int2(phi,k) - (K_int2(phi,k) * E_int(k)) / K_int(k)
+
+def Heuman(phi, k):
+    return K_int2(phi, 1-k)/K_int(1-k) + 2/np.pi * K_int(k)*Z_int(phi, 1-k)
+
