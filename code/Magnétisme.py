@@ -93,3 +93,4 @@ def E_int(phi, k):
     return E
 
 def Z_int(phi, k):
+    return E_int(phi,k) - (K_int(phi,k) * E_int(k)) / K_int(k)
