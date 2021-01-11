@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import random
 import math
 from scipy.special import ellipk
+from scipy.special import ellipe
 from utilities import *
 #Rayon du solénoïde (m):
 a = 0.05
