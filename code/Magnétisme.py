@@ -47,3 +47,6 @@ def Bz(r, z):
 #en utilisant scypi
 def K_int(k):
     return ellipk([k**2])
+
+def E_int(k):
+    return ellipe([k**2])
