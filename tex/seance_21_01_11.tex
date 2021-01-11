@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\author{Maxime WIRTH}
+\title{TIPE 2020/2021 : \\ Débris Spatiaux}
+\date{12 octobre 2020}
+
+\begin{document}
+\maketitle
+
+Explication des graphes Br0 et Bz0:
+
+Dans notre modèle, le repère cylindrique est centré en le point situé à L/2 du solénoïde, sur l'axe de rotation.\\
+De plus, on est en approximation $ r \to 0 $.
+
+\begin{itemize}
+    \item Br0:\\
+        Tant qu'on est dans le solénoïde, le champ magnétique est uniforme et uniquement selon z, donc on a 0 ici.\\
+        Quand z dépasse L/2, les lignes de champ "bouclent" : on a une composante selon r, qui est plus 
+        grande avec r croissant, mais ça sort du modèle.
+    \item Bz0:\\
+        Tant qu'on est dans le solénoïde, le champ magnétique est uniforme et uniquement selon z, donc la 
+        valeur est élevée.
+        Quand z dépasse L/2, les lignent de champ "bouclent" : cependant, avec $r \to 0$, les LDC mettent
+        un certain temps à le faire, on garde la composante.
+\end{itemize}
+
+\end{document}
