@@ -20,10 +20,7 @@ mu0 = 1.25663706 * 10**(-6)
 
 #Pour r qui se rapproche de 0:
 # Calcule la composante du champ magnétique selon r à un instant donné
-def Br0(vec):
-
-    pol = polar_of_cart(vec)
-    r = pol.get_x()
+def Br0(r, z):
     a = mu0 * n * i / 4
     xip = z + L/2
     xim = z - L/2
@@ -35,7 +32,7 @@ def Br0(vec):
 
 
 # Calcule la composante du champ magnétique selon z à un instant donné
-def Bz0(vec):
+def Bz0(r, z):
 
     a = mu0 * n * i / 2
     xip = z + L/2
@@ -46,8 +43,7 @@ def Bz0(vec):
     
     return a * (f(xip) - f(xim))
 
-#cas général
-def Br
+
 
 #Renvoie le vecteur champ magnétique à un instant donné
 def calc_magn1(vec):
