@@ -46,8 +46,6 @@ def Bz0(vec):
     
     return a * (f(xip) - f(xim))
 
-#cas général
-def Br
 
 #Renvoie le vecteur champ magnétique à un instant donné
 def calc_magn1(vec):
