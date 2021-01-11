@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import random
 import math
 from scipy.special import ellipk
-from scypy.integral import ellipe
+from scipy.special import ellipe
 from utilities import *
 #Rayon du solénoïde (m):
 a = 2
@@ -43,11 +43,19 @@ def Bz(r, z):
     
     return a * (f(xip) - f(xim))
 
-# Dans le cas général (?)
-"Complete ellipitc integral, second kind : E(k) = E(pi/2, k)"
+#Renvoie le vecteur champ magnétique à un instant donné
+def calc_magn1(vec):
+    return Vecteur(Br(vec), 0, Bz(vec))
+
+
+# Dans le cas général 
 #en utilisant scypi
+
+#Complete ellipitc integral, first kind : K(k) = K(pi/2, k)
 def K_int(k):
     return ellipk([k**2])
 
+
+#Complete ellipitc integral, second kind : E(k) = E(pi/2, k)
 def E_int(k):
     return ellipe([k**2])
