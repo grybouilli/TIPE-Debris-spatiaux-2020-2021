@@ -50,8 +50,13 @@ def calc_magn1(vec):
     return Vecteur(Br(vec), 0, Bz(vec))
 
 
-# Dans le cas général (?)
-"Complete ellipitc integral, second kind : E(k) = E(pi/2, k)"
+# Dans le cas général 
 #en utilisant scypi
+
+#Complete ellipitc integral, first kind : K(k) = K(pi/2, k)
 def K_int(k):
     return ellipk([k**2])
+
+#Complete ellipitc integral, second kind : E(k) = E(pi/2, k)
+def E_int(k):
+    return ellipe([k**2])
