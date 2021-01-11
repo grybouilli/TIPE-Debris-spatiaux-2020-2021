@@ -91,3 +91,6 @@ def E_int(phi, k):
     for i in range(len(E)):
         E[i] = ellipeinc([E[i]])
     return E
+
+def Z_int(phi, k):
+    
