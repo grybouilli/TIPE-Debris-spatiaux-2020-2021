@@ -43,8 +43,18 @@ def Bz0(r, z):
     
     return a * (f(xip) - f(xim))
 
+#cas général 
+
+def Br(r,z):
+    c = (mu0 * n * i)/ np.pi 
+    xip = z+L/2
+    xim = z-L/2
+    k_pos = (4*a*r)/((xip)**2 + (a+r)**2)
+    k_neg = (4*a*r)/((xim)**2 + (a+r)**2)
 
 
+    return c * np.sqrt(a/r) * (((2-k_pos) * K_int(np.sqrt(k_pos))/(2*np.sqrt(k_pos)) -  E_int(np.sqrt(k_pos)) / np.sqrt(k_pos) ) - ( (2-k_neg) * K_int(np.sqrt(k_neg))/(2*np.sqrt(k_neg)) -  E_int(np.sqrt(k_neg)) / np.sqrt(k_neg))) 
+    
 #Renvoie le vecteur champ magnétique à un instant donné
 def calc_magn1(vec):
     return Vecteur(Br(vec), 0, Bz(vec))
@@ -55,9 +65,29 @@ def calc_magn1(vec):
 
 #Complete ellipitc integral, first kind : K(k) = K(pi/2, k)
 def K_int(k):
-    return ellipk([k**2])
+    K= np.zeros(len(k))
+    for i in range(len(K)):
+        K[i] = ellipk([K[i]])
+    return K
 
 
 #Complete ellipitc integral, second kind : E(k) = E(pi/2, k)
 def E_int(k):
-    return ellipe([k**2])
+    E = np.zeros(len(k))
+    for i in range(len(E)):
+        E[i] = ellipe([E[i]])
+    return E
+
+def K_int(phi, k):
+    K= np.zeros(len(k))
+    for i in range(len(K)):
+        K[i] = ellipkinc([K[i]])
+    return K
+
+
+#Complete ellipitc integral, second kind : E(k) = E(pi/2, k)
+def E_int(phi, k):
+    E = np.zeros(len(k))
+    for i in range(len(E)):
+        E[i] = ellipeinc([E[i]])
+    return E
