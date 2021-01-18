@@ -70,9 +70,6 @@ def Bz(r,z):
     (xip*np.sqrt(k_pos))/(np.pi*np.sqrt(a*r)) * K_int(np.sqrt(k_pos)) - (xim*np.sqrt(k_neg))/(np.pi*np.sqrt(a*r)) * K_int(np.sqrt(k_neg))
     +
     ((a-r)*xip / np.abs((a-r)*xip)) * Heuman(phi_pos, k_pos) - ((a-r)*xim / np.abs((a-r)*xim)) * Heuman(phi_neg, k_neg))
-#Renvoie le vecteur champ magnétique à un instant donné
-def calc_magn1(vec):
-    return Vecteur(Br(vec), 0, Bz(vec))
 
 
 # Dans le cas général 
