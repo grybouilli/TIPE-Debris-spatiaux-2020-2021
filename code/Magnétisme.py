@@ -54,7 +54,6 @@ def Br(r,z):
     k_pos = (4*a*r)/((xip)**2 + (a+r)**2)
     k_neg = (4*a*r)/((xim)**2 + (a+r)**2)
 
-
     return c * np.sqrt(a/r) * (((2-k_pos) * K_int(np.sqrt(k_pos))/(2*np.sqrt(k_pos)) -  E_int(np.sqrt(k_pos)) / np.sqrt(k_pos) ) - ( (2-k_neg) * K_int(np.sqrt(k_neg))/(2*np.sqrt(k_neg)) -  E_int(np.sqrt(k_neg)) / np.sqrt(k_neg))) 
     
 def Bz(r,z):
@@ -66,7 +65,7 @@ def Bz(r,z):
     phi_neg =  Phi(xim, r)
     k_pos = (4*a*r)/((xip)**2 + (a+r)**2)
     k_neg = (4*a*r)/((xim)**2 + (a+r)**2)
-    return(
+    return( c1 * (
     (xip*np.sqrt(k_pos))/(np.pi*np.sqrt(a*r)) * K_int(np.sqrt(k_pos)) - (xim*np.sqrt(k_neg))/(np.pi*np.sqrt(a*r)) * K_int(np.sqrt(k_neg))
     +
     ((a-r)*xip / np.abs((a-r)*xip)) * Heuman(phi_pos, k_pos) - ((a-r)*xim / np.abs((a-r)*xim)) * Heuman(phi_neg, k_neg))
