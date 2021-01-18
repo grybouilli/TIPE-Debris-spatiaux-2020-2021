@@ -65,7 +65,7 @@ def Bz(r,z):
     phi_neg =  Phi(xim, r)
     k_pos = (4*a*r)/((xip)**2 + (a+r)**2)
     k_neg = (4*a*r)/((xim)**2 + (a+r)**2)
-    return( c1 * (
+    return c1* (
     (xip*np.sqrt(k_pos))/(np.pi*np.sqrt(a*r)) * K_int(np.sqrt(k_pos)) - (xim*np.sqrt(k_neg))/(np.pi*np.sqrt(a*r)) * K_int(np.sqrt(k_neg))
     +
     ((a-r)*xip / np.abs((a-r)*xip)) * Heuman(phi_pos, k_pos) - ((a-r)*xim / np.abs((a-r)*xim)) * Heuman(phi_neg, k_neg)))
@@ -77,41 +77,19 @@ def normeB(r, z):
 #en utilisant scypi
 
 #Complete ellipitc integral, first kind : K(k) = K(pi/2, k)
+
 def K_int(k):
-    (n,m) = len(k), len(k[0])
-    K= np.zeros(len(k))
-    for i in range(n):
-        for j in  range(m):
-            K[i] = ellipk([k[i][j]])
-    return K
-
+    return ellipk(k)
 #Complete ellipitc integral, second kind : E(k) = E(pi/2, k)
+
 def E_int(k):
-    (n,m) = len(k), len(k[0])
-    E = np.zeros(len(k))
-    for i in range(n):
-        for j in range(m):
-            E[i] = ellipe([k[i][j]])
-    return E
+    return ellipe(k)
 
-def K_int2(phi, k):
-    (n,m) = len(k), len(k[0])
-    K= np.zeros(len(k))
-    for i in range(n):
-        for j in range(m):
-            K[i] = ellipkinc([phi[i][j]],[k[i][j]])
-    return K
+def K_int2(phi,k):
+    return ellipkinc(phi,k)
 
-
-#Complete ellipitc integral, second kind : E(k) = E(pi/2, k)
-def E_int2(phi, k):
-    (n,m) = len(k), len(k[0])
-    E = np.zeros(len(k))
-    for i in range(n):
-        for j in range(m):
-            E[i] = ellipeinc([phi[i][j]],[k[i][j]])
-    return E
-
+def E_int2(phi,k):
+    return ellipeinc(phi,k)
 def Z_int(phi, k):
     return E_int2(phi,k) - (K_int2(phi,k) * E_int(k)) / K_int(k)
 

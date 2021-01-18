@@ -29,7 +29,7 @@ coordNorm = mg.normeB(r, z)
 planeBr0 = ax1.plot_surface(r, z, coordBr0, label = 'Br0', color = 'b')
 planeBz0 = ax2.plot_surface(r, z, coordBz0, label = 'Bz0', color = 'r') 
 planeBr = ax3.plot_surface(r, z, coordBr, label = 'Br', color = 'g')
-planeBr = ax4.plot_surface(r, z, coordBr, label = 'Bz', color = 'm')
+planeBz = ax4.plot_surface(r, z, coordBz, label = 'Bz', color = 'm')
 planeNorm = ax5.plot_surface(r, z, coordNorm, label = 'Norme de B', color = 'cyan')
 
 plt.show()
