@@ -71,6 +71,8 @@ def Bz(r,z):
     +
     ((a-r)*xip / np.abs((a-r)*xip)) * Heuman(phi_pos, k_pos) - ((a-r)*xim / np.abs((a-r)*xim)) * Heuman(phi_neg, k_neg))
 
+def normeB(r, z):
+    return np.sqrt( (Bz(r, z))**2 + (Br(r, z))**2 )
 
 # Dans le cas général 
 #en utilisant scypi
