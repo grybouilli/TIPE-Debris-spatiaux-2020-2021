@@ -14,7 +14,7 @@ i = 5
 #Longueur du solénoïde (m):
 L = 10
 #Nombre de tour par mètre (tours.m*(-1)):
-n = 100000
+n = 1000
 #Perméabilité du vide (m.kg.s**(-2).A**(-2)):
 mu0 = 1.25663706 * 10**(-6)
 
@@ -68,7 +68,7 @@ def Bz(r,z):
     return( c1 * (
     (xip*np.sqrt(k_pos))/(np.pi*np.sqrt(a*r)) * K_int(np.sqrt(k_pos)) - (xim*np.sqrt(k_neg))/(np.pi*np.sqrt(a*r)) * K_int(np.sqrt(k_neg))
     +
-    ((a-r)*xip / np.abs((a-r)*xip)) * Heuman(phi_pos, k_pos) - ((a-r)*xim / np.abs((a-r)*xim)) * Heuman(phi_neg, k_neg))
+    ((a-r)*xip / np.abs((a-r)*xip)) * Heuman(phi_pos, k_pos) - ((a-r)*xim / np.abs((a-r)*xim)) * Heuman(phi_neg, k_neg)))
 
 def normeB(r, z):
     return np.sqrt( (Bz(r, z))**2 + (Br(r, z))**2 )
