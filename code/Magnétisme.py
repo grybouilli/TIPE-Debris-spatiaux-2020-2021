@@ -54,7 +54,6 @@ def Br(r,z):
     k_pos = (4*a*r)/((xip)**2 + (a+r)**2)
     k_neg = (4*a*r)/((xim)**2 + (a+r)**2)
 
-
     return c * np.sqrt(a/r) * (((2-k_pos) * K_int(np.sqrt(k_pos))/(2*np.sqrt(k_pos)) -  E_int(np.sqrt(k_pos)) / np.sqrt(k_pos) ) - ( (2-k_neg) * K_int(np.sqrt(k_neg))/(2*np.sqrt(k_neg)) -  E_int(np.sqrt(k_neg)) / np.sqrt(k_neg))) 
     
 def Bz(r,z):
@@ -69,7 +68,8 @@ def Bz(r,z):
     +
     ((a-r)*xip / np.abs((a-r)*xip)) * Heuman(phi, k_pos) - ((a-r)*xim / np.abs((a-r)*xim)) * Heuman(phi, k_neg))
 
-
+def normeB(r, z):
+    return np.sqrt( (Bz(r, z))**2 + (Br(z, r))**2 )
 
 # Dans le cas général 
 #en utilisant scypi
