@@ -8,13 +8,13 @@ from scipy.special import ellipkinc
 from scipy.special import ellipeinc
 from utilities import *
 #Rayon du solénoïde (m):
-a = 5
+a = 1.5
 #Intensité du courant dans les filaments (A):
-i = 10
+i = 100000
 #Longueur du solénoïde (m):
-L = 5
-#Nombre de tour par mètre (tours.m*(-1)):
-n = 1000
+L = 10
+#Nombre de tour par mètre (tours.m*(-1)) (on peut avoir un diamètre de fil de 0.3mm):
+n = 30000
 #Perméabilité du vide (m.kg.s**(-2).A**(-2)):
 mu0 = 1.25663706 * 10**(-6)
 
