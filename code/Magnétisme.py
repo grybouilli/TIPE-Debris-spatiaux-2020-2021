@@ -8,13 +8,13 @@ from scipy.special import ellipkinc
 from scipy.special import ellipeinc
 from utilities import *
 #Rayon du solénoïde (m):
-a = 10
+a = 5
 #Intensité du courant dans les filaments (A):
-i = 5
+i = 10
 #Longueur du solénoïde (m):
-L = 50
+L = 5
 #Nombre de tour par mètre (tours.m*(-1)):
-n = 10000
+n = 1000
 #Perméabilité du vide (m.kg.s**(-2).A**(-2)):
 mu0 = 1.25663706 * 10**(-6)
 
@@ -95,4 +95,3 @@ def Z_int(phi, k):
 
 def Heuman(phi, k):
     return K_int2(phi, 1-k)/K_int(1-k) + 2/np.pi * K_int(k)*Z_int(phi, 1-k)
-
