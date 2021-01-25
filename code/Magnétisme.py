@@ -12,13 +12,13 @@ a = 1.5
 #Intensité du courant dans les filaments (A):
 i = 100000
 #Longueur du solénoïde (m):
+<<<<<<< HEAD
 L = 10
 #Nombre de tour par mètre (tours.m*(-1)) (on peut avoir un diamètre de fil de 0.3mm):
 n = 30000
-#Perméabilité du vide (m.kg.s**(-2).A**(-2)):
-mu0 = 1.25663706 * 10**(-6)
-
-
+L = 50
+#Nombre de tour par mètre (tours.m*(-1)):
+n = 10000
 
 #Pour r qui se rapproche de 0:
 # Calcule la composante du champ magnétique selon r à un instant donné
