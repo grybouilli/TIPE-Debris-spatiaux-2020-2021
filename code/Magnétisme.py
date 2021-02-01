@@ -8,7 +8,7 @@ from scipy.special import ellipkinc
 from scipy.special import ellipeinc
 from utilities import *
 #Rayon du solénoïde (m):
-a = 1.5
+a = 3
 #Intensité du courant dans les filaments (A):
 i = 100000
 #Longueur du solénoïde (m):
@@ -82,9 +82,12 @@ def Br_aj(r, z, epsilon):
     n = len(r)
     m = len(r[0])
     for i in range(n):
-        for i in range(m):
+        for j in range(m):
             if abs(r[i][j]) < epsilon:
-                res[i][j] = Br0(r[i][j], z[i][j])
+                '''
+                res[i][j] = Br0(r[i][j], z[i][j]
+                '''
+                res[i][j] *= 1/10
     return res
 
 def Bz_aj(r, z, epsilon):
@@ -94,7 +97,10 @@ def Bz_aj(r, z, epsilon):
     for i in range(n):
         for j in range(m):
             if abs(r[i][j]) < epsilon:
+                '''
                 res[i][j] = Bz0(r[i][j], z[i][j])
+                '''
+                res[i][j] *= 1/10
     return res
 
 
