@@ -1,21 +1,8 @@
 \documentclass{article}
 
-\usepackage[french]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[ utf8]{ inputenc }
-\usepackage{lmodern}
-\usepackage{microtype}
-\usepackage{hyperref}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{amsfonts}
-\usepackage{stmaryrd}
-\usepackage{graphicx}
-\usepackage{ textcomp }
+\usepackage{global}
+\chead{Modélisation dipolaire}
 
-\newcommand{\MM}{\mathcal{M}}
-\newcommand{\valmoy}[1]{\mbox{\textlangle} #1\mbox{\textrangle}}
 \author{Nicolas GRY}
 
 \title{Modélisation dipolaire d'un matériau paramagnétique}
@@ -30,12 +17,15 @@ Modéliser un matériau paramagnétique comme un dipole magnétique pour étudie
 Un électron qui gravite autour du noyau d'un atome, par son mouvement, provoque un \emph{moment magnétique orbital}. De plus, un électron comporte un \emph{moment magnétique de spin}. Le \emph{moment magnétique atomique} est donc la somme de tous les moments magnétiques orbitaux et tous les moments magnétiques de spin.
 
 \textbf{Moment magnétique atomique}
+\begin{prettybox}
+\large
 $$\MM = \displaystyle \sum \MM_{o} + \sum \MM_{s}$$
-
 \small 
 \textbf{$\MM_{o}$}: les moments magnétiques orbitaux
 
 \textbf{$\MM_{s}$}: les moments magnétiques de spin
+\end{prettybox}
+
 \normalsize
 
 \textbf{Remarque}

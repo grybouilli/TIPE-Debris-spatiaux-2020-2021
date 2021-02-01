@@ -1,0 +1,33 @@
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most]{tcolorbox}
+
+%? Nice boxes
+%%%%%%%%%%%%%
+\newcommand{\theocolor}{magenta}
+\definecolor{ShadowColor}{RGB}{30,150,190}
+
+\makeatletter
+\newcommand\Cshadowbox{\VerbBox\@Cshadowbox}
+\def\@Cshadowbox#1{%
+  \setbox\@fancybox\hbox{\fbox{#1}}%
+  \leavevmode\vbox{%
+    \offinterlineskip
+    \dimen@=\shadowsize
+    \advance\dimen@ .5\fboxrule
+    \hbox{\copy\@fancybox\kern.5\fboxrule\lower\shadowsize\hbox{%
+      \color{ShadowColor}\vrule \@height\ht\@fancybox \@depth\dp\@fancybox \@width\dimen@}}%
+    \vskip\dimexpr-\dimen@+0.5\fboxrule\relax
+    \moveright\shadowsize\vbox{%
+      \color{ShadowColor}\hrule \@width\wd\@fancybox \@height\dimen@}}}
+\makeatother
+
+
+
+
+\newenvironment{prettybox}[1][black]{
+\colorlet{ShadowColor}{#1!70!black}\vspace{10px}
+    \begin{tcolorbox}[colback=#1!5!white, colframe=#1!80!black, enhanced jigsaw,sharp corners, drop shadow=ShadowColor]
+}
+{\end{tcolorbox}
+\vspace{10px}
+}
