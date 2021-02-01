@@ -6,6 +6,7 @@ import numpy as np
 fig1 = plt.figure()
 fig2 = plt.figure()
 fig3 = plt.figure()
+n = 10000
 
 ax1 = fig1.gca(projection='3d')
 ax2 = fig2.gca(projection='3d')
