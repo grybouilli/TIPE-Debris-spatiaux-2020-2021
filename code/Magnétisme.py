@@ -80,17 +80,21 @@ def normeB(r, z):
 def Br_aj(r, z, epsilon):
     res = Br(r, z)
     n = len(r)
+    m = len(r[0])
     for i in range(n):
-        if abs(r[i]) < epsilon:
-            res[i] = Br0(r[i], z[i])
+        for i in range(m):
+            if abs(r[i][j]) < epsilon:
+                res[i][j] = Br0(r[i][j], z[i][j])
     return res
 
 def Bz_aj(r, z, epsilon):
     res = Bz(r, z)
     n = len(r)
+    m = len(r[0])
     for i in range(n):
-        if abs(r[i]) < epsilon:
-            res[i] = Bz0(r[i], z[i])
+        for j in range(m):
+            if abs(r[i][j]) < epsilon:
+                res[i][j] = Bz0(r[i][j], z[i][j])
     return res
 
 
