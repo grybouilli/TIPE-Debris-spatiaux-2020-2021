@@ -18,8 +18,13 @@ n = 30000
 #Perméabilité du vide (T.m/A)
 mu0 = 12.566370614 * 10**(-7)
 
+#Epsilon pour éviter la douille
+epsilon = 0.01
+
 #Pour r qui se rapproche de 0:
 # Calcule la composante du champ magnétique selon r à un instant donné
+
+
 def Br0(r, z):
     a = mu0 * n * i / 4
     xip = z + L/2
@@ -70,6 +75,24 @@ def Bz(r,z):
 
 def normeB(r, z):
     return np.sqrt( (Bz(r, z))**2 + (Br(r, z))**2 )
+
+#Ajustement
+def Br_aj(r, z, epsilon):
+    res = Br(r, z)
+    n = len(r)
+    for i in range(n):
+        if abs(r[i]) < epsilon:
+            res[i] = Br0(r[i], z[i])
+    return res
+
+def Bz_aj(r, z, epsilon):
+    res = Bz(r, z)
+    n = len(r)
+    for i in range(n):
+        if abs(r[i]) < epsilon:
+            res[i] = Bz0(r[i], z[i])
+    return res
+
 
 # Dans le cas général 
 #en utilisant scypi

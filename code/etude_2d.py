@@ -3,19 +3,17 @@ import librairies.display as disp
 import matplotlib.pyplot as plt
 import numpy as np
 
-fig1 = plt.figure()
-fig2 = plt.figure()
-fig3 = plt.figure()
 n = 10000
 
-ax1 = fig1.gca(projection='3d')
-ax2 = fig2.gca(projection='3d')
-ax3 = fig3.gca(projection='3d')
+fig, ax = plt.subplots()
 
-r = np.linspace(1, 11, n)
-z = np.linspace(1, 15, n)
+r, z = np.arange(-50, 50), np.arange(-50, 50)
 r, z = np.meshgrid(r, z)
+U, V = mg.Br(abs(r), abs(z)), mg.Bz(abs(r), abs(z))
 
-coordBr = mg.Br(r, z)
-coordBz = mg.Bz(r, z)
-coordNorm = mg.normeB(r, z)
+ax.xaxis.set_ticks([])
+ax.yaxis.set_ticks([])
+
+ax.quiver(r, z, U, V)
+ax.set_title('Norme du champ magnétique')
+plt.show()

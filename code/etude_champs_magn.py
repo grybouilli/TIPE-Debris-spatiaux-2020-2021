@@ -22,15 +22,15 @@ ax3 = fig3.gca(projection='3d')
 ax4 = fig4.gca(projection='3d')
 ax5 = fig5.gca(projection='3d')
 
-r = np.linspace(1, 11, n)
-z = np.linspace(1, 15, n)
+r = np.linspace(-11, 11, n)
+z = np.linspace(-11, 15, n)
 r, z = np.meshgrid(r, z)
 '''
 coordBr0 = mg.Br0(r, z) 
 coordBz0 = mg.Bz0(r, z)'''
-coordBr = mg.Br(r, z)
-coordBz = mg.Bz(r, z)
-coordNorm = mg.normeB(r, z)
+coordBr = mg.Br(abs(r), abs(z))
+coordBz = mg.Bz(abs(r), abs(z))
+coordNorm = mg.normeB(abs(r), abs(z))
 '''
 planeBr0 = ax1.plot_surface(r, z, coordBr0, label = 'Br0', color = 'b')
 planeBz0 = ax2.plot_surface(r, z, coordBz0, label = 'Bz0', color = 'r') '''
