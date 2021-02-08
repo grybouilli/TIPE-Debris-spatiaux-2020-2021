@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 epsilon = 0
-w = 11
+w = 11/10 * mg.L
 
 fig, ax = plt.subplots()
 
-r, z = np.arange(-w, w, 0.3), np.arange(-w, w, 0.3)
+r, z = np.arange(-w, w, 0.2), np.arange(-w, w, 0.2)
 r, z = np.meshgrid(r, z)
 U, V = mg.Br_aj(r, z, epsilon), mg.Bz_aj(r, z, epsilon)
 
@@ -21,9 +21,9 @@ print("La norme au milieu du champ est",np.sqrt(U[mo//2][mo//2] **2 + V[moo//2][
 
 ax.quiver(r, z, U, V)
 #Carte des intensités
-#ax.set_title('Norme du champ magnétique')
+ax.set_title('Vecteur champ magnétique')
 
 #Vecteur champ magnétique 
 #plt.pcolor(z, r, mg.normeB(abs(r), z), label = 'Norme du champ magnétique')
 
-#plt.show()
+plt.show()

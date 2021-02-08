@@ -8,11 +8,11 @@ from scipy.special import ellipkinc
 from scipy.special import ellipeinc
 from utilities import *
 #Rayon du solénoïde (m):
-a = 1
+a = 4
 #Intensité du courant dans les filaments (A):
 i = 100000
 #Longueur du solénoïde (m):
-L = 100
+L = 15
 #Nombre de tour par mètre (tours.m*(-1)) (on peut avoir un diamètre de fil de 0.3mm):
 n = 30000
 #Perméabilité du vide (T.m/A)
@@ -80,6 +80,7 @@ def Br_aj(r, z, epsilon):
     n = len(r)
     m = len(r[0])
     values = [[0 for j in range(m)] for i in range(n)]
+
     for i in range(n):
         for j in range(m):
 
@@ -98,6 +99,7 @@ def Bz_aj(r, z, epsilon):
     n = len(r)
     m = len(r[0])
     values = [[0 for j in range(m)] for i in range(n)]
+
     for i in range(n):
         for j in range(m):
 
