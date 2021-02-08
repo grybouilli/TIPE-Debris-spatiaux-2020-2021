@@ -17,7 +17,7 @@ ax.yaxis.set_ticks([])
 
 mo = len(U)
 moo = len(V)
-print("La norme au milieu du champ est",np.sqrt(U[mo//2][mo//2] **2 + V[moo//2][moo//2] **2),"normalement",  mg.mu0 * mg.n * mg.L * mg.i )
+print("La norme au milieu du champ est",np.sqrt(U[mo//2][mo//2] **2 + V[moo//2][moo//2] **2),"normalement",  mg.mu0 * mg.n * mg.L * mg.i)
 
 ax.quiver(r, z, U, V)
 #Carte des intensités
