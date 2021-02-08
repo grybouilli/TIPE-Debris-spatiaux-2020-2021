@@ -77,30 +77,38 @@ def normeB(r, z):
     return np.sqrt( (Bz(r, z))**2 + (Br(r, z))**2 )
 
 #Ajustement
+def bords(r, z, epsilon):
+    return (r-a < epsilon and z - L/2 < epsilon) or (r-a < epsilon and z + L/2 < epsilon) or (r+a < epsilon and z - L/2 < epsilon) or (r+a < epsilon and z + L/2 < epsilon)
+
 def Br_aj(r, z, epsilon):
     res = Br(r, z)
     n = len(r)
     m = len(r[0])
     for i in range(n):
         for j in range(m):
+
             if abs(r[i][j]) < epsilon:
-                '''
-                res[i][j] = Br0(r[i][j], z[i][j]
-                '''
-                res[i][j] *= 1/10
+                res[i][j] *= 1
+
+            if r[i][j] < 0:
+                res[i][j] *= -1
+            if bords(r[i][j], z[i][j], epsilon):
+                res[i][j] *= 1/5
     return res
 
 def Bz_aj(r, z, epsilon):
     res = Bz(r, z)
     n = len(r)
     m = len(r[0])
+
     for i in range(n):
         for j in range(m):
+
             if abs(r[i][j]) < epsilon:
-                '''
-                res[i][j] = Bz0(r[i][j], z[i][j])
-                '''
-                res[i][j] *= 1/10
+                res[i][j] *= 1
+
+            if bords(r[i][j], z[i][j], epsilon):
+                res[i][j] *= 1/5
     return res
 
 
