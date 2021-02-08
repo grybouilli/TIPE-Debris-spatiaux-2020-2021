@@ -1,0 +1,6 @@
+faire une étude numérique de l'équation différentielle non approximée (avec le sin)
+
+faire une étude du mouvement dans le champ magnétique
+
+checker si y a un champ électrique (et si oui, eest-ce qu'il pourrait dévier / accélérer le déchet?)
+
