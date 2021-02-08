@@ -1,0 +1,66 @@
+\documentclass{report}
+
+\usepackage{global}
+\chead{Étude cinématique}
+
+\author{Nicolas GRY}
+
+\title{Étude du mouvement du déchet}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\chapter{Phase de déplacement dans le champ magnétique}
+\section{Mise en situation}
+\subsection{Introduction des grandeurs et notations}
+
+On considère un solénoïde caractérisé par:
+\begin{itemize}
+    \item Sa longueur $L$
+    \item Son rayon $a$
+    \item L'intensité du courant qui le traverse $i$
+    \item Son nombre de spires $n$ 
+\end{itemize}
+Ce solénoïde engendre un champ magnétique:
+ $$\vect{B} = B_r \vect{e_r} + B_z \vect{e_z}$$.
+On notera indifféremment $||\vect{B}||$ et $B$.
+
+On considère un déchet spatiale, de masse $m$, que l'on modélise par un moment magnétique $\vect{p}$. 
+
+On notera indifféremment $||\vect{p}||$ et $p$.
+
+On travaillera dans le repère cylindrique $(\vect{e_r},\vect{e_\theta},\vect{e_z})$ et on notera $(r,\theta,z)$ les coordonnées du déchet.
+
+\subsection{Schéma de la situation}
+
+%à faire et à mettre dans le peudeuf
+
+\section{Étude littérale du mouvement}
+\subsection{Étude de l'alignement du déchet}
+
+\ulbf{Système}: {débris assimilé à un moment magnétique $\vect{p}$ de masse m}
+
+\ulbf{Référentiel}: En lien avec le solénoïde, supposé galiléen (raisonnable au regard de la durée de l'expérience)
+
+\ulbf{Bilan des forces}
+
+Force magnétique :
+$$\vec{F_B} = \vect{\text{grad}}(\vect{B}.\vect{p})$$
+
+\ulbf{Théorème du moment cinétique}
+
+Projeté selon $\vect{e_\theta}$ :
+\begin{align*}
+m \derived{\theta}{t} &= \vect{\MM}(\vect{F_B}) . \vect{e_\theta} \\
+&= (\vect{p} \wedge \vect{B}).\vect{e_\theta}\\
+&= pB\sin(\theta)
+\end{align*}
+
+On obtient l'équation différentielle suivante:
+$$\derived{\theta}{t} - \frac{pB}{m} \sin(\theta) = 0$$
+On se place en premier dans la situation où $\theta$ est considéré petit. On a alors:
+$$\derived{\theta}{t} - \frac{pB}{m} \theta = 0$$
+
+On pose alors $$\omega_{align}^2 = - \frac{pB}{m}$$.
+\end{document}
