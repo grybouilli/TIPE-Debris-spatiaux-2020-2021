@@ -117,6 +117,7 @@ def Bz_aj(r, z, epsilon):
     return values
 
 
+
 # Dans le cas général 
 #en utilisant scypi
 
