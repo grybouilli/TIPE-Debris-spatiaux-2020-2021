@@ -81,35 +81,40 @@ def bords(r, z, epsilon):
     return (r-a < epsilon and z - L/2 < epsilon) or (r-a < epsilon and z + L/2 < epsilon) or (r+a < epsilon and z - L/2 < epsilon) or (r+a < epsilon and z + L/2 < epsilon)
 
 def Br_aj(r, z, epsilon):
-    res = Br(r, z)
     n = len(r)
     m = len(r[0])
+    values = [[0 for j in range(m)] for i in range(n)]
     for i in range(n):
         for j in range(m):
 
             if abs(r[i][j]) < epsilon:
-                res[i][j] *= 1
+                values[i][j] = Br(r[i][j], z[i][j])
 
-            if r[i][j] < 0:
-                res[i][j] *= -1
-            if bords(r[i][j], z[i][j], epsilon):
-                res[i][j] *= 1/5
-    return res
+            elif r[i][j] < 0:
+                values[i][j] = -Br(-r[i][j], z[i][j])
+      
+            else:
+                values[i][j] = Br(r[i][j], z[i][j])
+
+    return values
 
 def Bz_aj(r, z, epsilon):
-    res = Bz(r, z)
     n = len(r)
     m = len(r[0])
-
+    values = [[0 for j in range(m)] for i in range(n)]
     for i in range(n):
         for j in range(m):
 
             if abs(r[i][j]) < epsilon:
-                res[i][j] *= 1
+                values[i][j] = Bz(r[i][j], z[i][j])
 
-            if bords(r[i][j], z[i][j], epsilon):
-                res[i][j] *= 1/5
-    return res
+            elif r[i][j] < 0:
+                values[i][j] = Bz(-r[i][j], z[i][j])
+  
+            else:
+                values[i][j] = Bz(r[i][j], z[i][j])
+    
+    return values
 
 
 # Dans le cas général 
