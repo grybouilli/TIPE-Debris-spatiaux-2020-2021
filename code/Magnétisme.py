@@ -76,32 +76,44 @@ def Bz(r,z):
 def normeB(r, z):
     return np.sqrt( (Bz(r, z))**2 + (Br(r, z))**2 )
 
-#Ajustement
 def Br_aj(r, z, epsilon):
-    res = Br(r, z)
     n = len(r)
     m = len(r[0])
+    values = [[0 for j in range(m)] for i in range(n)]
+
     for i in range(n):
         for j in range(m):
+
             if abs(r[i][j]) < epsilon:
-                '''
-                res[i][j] = Br0(r[i][j], z[i][j]
-                '''
-                res[i][j] *= 1/10
-    return res
+                values[i][j] = Br(r[i][j], z[i][j])
+
+            elif r[i][j] < 0:
+                values[i][j] = -Br(-r[i][j], z[i][j])
+      
+            else:
+                values[i][j] = Br(r[i][j], z[i][j])
+
+    return values
 
 def Bz_aj(r, z, epsilon):
-    res = Bz(r, z)
     n = len(r)
     m = len(r[0])
+    values = [[0 for j in range(m)] for i in range(n)]
+
     for i in range(n):
         for j in range(m):
+
             if abs(r[i][j]) < epsilon:
-                '''
-                res[i][j] = Bz0(r[i][j], z[i][j])
-                '''
-                res[i][j] *= 1/10
-    return res
+                values[i][j] = Bz(r[i][j], z[i][j])
+
+            elif r[i][j] < 0:
+                values[i][j] = Bz(-r[i][j], z[i][j])
+  
+            else:
+                values[i][j] = Bz(r[i][j], z[i][j])
+    
+    return values
+
 
 
 # Dans le cas général 
