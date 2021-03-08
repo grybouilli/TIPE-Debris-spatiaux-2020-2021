@@ -50,7 +50,7 @@ On travaillera dans le repère cylindrique $(\vect{e_r},\vect{e_\theta},\vect{e_
 On imagine que le moment magnétique $\vect{p}$ forme un angle $\alpha$ avec $\vect{e_z}$. L'objectif ici est d'étudier les variations de $\alpha$ et d'évaluer le temps que met $\vect{p}$ à s'aligner avec les lignes de champs.
 \newpage
 \section{Étude littérale du mouvement}
-\subsection{Étude de l'alignement du déchet}
+\subsection{Étude de l'alignement angulaire du déchet}
 
 \ulbf{Système}: {débris assimilé à un moment magnétique solide $\vect{p}$ de moment d'inertie $J_\theta$}
 
@@ -58,9 +58,11 @@ On imagine que le moment magnétique $\vect{p}$ forme un angle $\alpha$ avec $\v
 
 \ulbf{Conditions initiales}
 
-À t = 0, on suppose que le déchet est incliné d'un angle $\alpha_0$ par rapport à l'axe de révolution du solénoïde. On suppose également la vitesse angulaire $\phder{\alpha}$ du déchet nulle à t = 0, ce qui est raisonnable puisque le déchet est dénué de tout mouvement dû au champ $\vect{B}$ lorsqu'il n'y est pas soumis, i.e. à t = 0.
+À t = 0, on suppose que le déchet est incliné d'un angle $\alpha_0$ par rapport à l'axe de révolution du solénoïde. On suppose également la vitesse angulaire $\phder{\alpha}$ du déchet nulle à t = 0, ce qui est raisonnable puisque le déchet est dénué de tout mouvement dû au champ $\vect{B}(r,z)$ lorsqu'il n'y est pas soumis, i.e. à t = 0.
 
 \ulbf{Bilan des forces}
+
+\emph{NB : Il ne faut pas oublier durant cette étude que $\vect{B}$ dépend de r et de z, les variables du répère cylindrique défini dans le cadre de l'étude.}
 
 Force magnétique :
 $$\vec{F_B} = \vect{\text{grad}}(\vect{B}.\vect{p})$$
@@ -79,7 +81,7 @@ On obtient l'équation différentielle suivante:
 \ulbf{Équation différentielle du 2$^{nd}$ ordre non-linéaire à second membre non-constant:}
 $$\derived{\alpha}{t} + \frac{pB_z}{J_\theta}\sin(\alpha) = \frac{pB_r}{J_\theta} \cos(\alpha)$$
 \end{prettybox}
-\subsubsection{Étude de la fin de l'alignement}
+\subsubsection{Étude de la fin de l'alignement angulaire}
 On se place en premier dans la situation où $\alpha$ est considéré petit. On a alors:
 $$\derived{\alpha}{t} + \frac{pB_z}{J_\theta}\alpha = \frac{pB_r}{J_\theta} $$
 
@@ -115,9 +117,31 @@ Et donc finalement :
 
 \begin{prettybox}[blue]
 \ulbf{Équation de l'angle formé entre $\vect{p}$ et $\vect{e_z}$}
-    $$\alpha(t) = \left(\alpha_0  - \frac{B_r}{B_z}\right) \cos(\omega_0 t) + \frac{B_r}{B_z}$$
+    $$\alpha(t) = \left(\alpha_0  - \frac{B_r(r,z)}{B_z(r,z)}\right) \cos(\omega_0 t) + \frac{B_r(r,z)}{B_z(r,z)}$$
 \end{prettybox}
 
-\subsubsection{Étude de l'alignement : Résolution numérique de l'équation différentielle}
+\subsubsection{Étude de l'alignement angulaire : Résolution numérique de l'équation différentielle}
+
+\subsection{Étude du déplacement du moment dans le champ magnétique}
+
+\ulbf{Système}: {débris assimilé à un moment magnétique solide $\vect{p}$}
+
+\ulbf{Référentiel}: En lien avec le solénoïde, supposé galiléen (raisonnable au regard de la durée de l'expérience)
+
+\ulbf{Conditions initiales}
+
+À t = 0, on suppose que le déchet est animé d'une vitesse initiale $\vect{v_0}$.
+
+\ulbf{Hypothèse}
+
+On travaille d'abord sans considérer la force d'attraction gravitationnelle entre le solénoïde et le débris.
+
+\ulbf{Bilan des forces}
+
+\emph{NB : Il ne faut pas oublier durant cette étude que $\vect{B}$ dépend de r et de z, les variables du répère cylindrique défini dans le cadre de l'étude.}
+
+Force magnétique d'aimantation :
+
+\url{https://oatao.univ-toulouse.fr/17352/1/Sadowski_17352.pdf}
 
 \end{document}
