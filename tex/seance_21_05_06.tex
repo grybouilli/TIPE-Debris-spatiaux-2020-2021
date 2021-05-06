@@ -1,0 +1,49 @@
+\documentclass{article}
+
+\usepackage{global}
+\chead{Modélisation dipolaire}
+
+\author{Nicolas GRY}
+
+\title{Modélisation dipolaire d'un matériau paramagnétique}
+
+\begin{document}
+\maketitle
+\section{Objectif}
+Modéliser un matériau paramagnétique comme un dipole magnétique pour étudier son mouvement dans un champs magnétique.
+
+\section{Introduction à la modélisation dipolaire}
+\subsection{Momant dipolaire d'un atome}
+Un électron qui gravite autour du noyau d'un atome, par son mouvement, provoque un \emph{moment magnétique orbital}. De plus, un électron comporte un \emph{moment magnétique de spin}. Le \emph{moment magnétique atomique} est donc la somme de tous les moments magnétiques orbitaux et tous les moments magnétiques de spin.
+
+\textbf{Moment magnétique atomique}
+\begin{prettybox}
+\large
+$$\MM = \displaystyle \sum \MM_{o} + \sum \MM_{s}$$
+\small 
+\textbf{$\MM_{o}$}: les moments magnétiques orbitaux
+
+\textbf{$\MM_{s}$}: les moments magnétiques de spin
+\end{prettybox}
+
+\normalsize
+
+\textbf{Remarque}
+
+On constate donc qu'un atome dont les couches sont saturés ne peut comporter un moment magnétique, car les moments magnétiques de spin s'annulent.
+
+\subsection{Cas du matériau paramagnétique}
+Un matériau paramagnétique, hors de tout champ magnétique, n'a pas de moment magnétique. En effet, les moments magnétiques atomiques étant "désorganisés", le moment magnétique total du matériau est globalement nul.
+
+Soumis à un champ magnétique, les moments magnétiques atomiques s'alignent selon le champs magnétique provoquant un momemnt magnétique global. On peut donc assimiler le matériau à ce moment magnétique $\MM$.
+
+\subsection{Aimantation}
+L'aimantation est définie comme étant la densité volumique de moment magnétique, c'est-à-dire: $$A = \frac{\mathrm{d}m}{\mathrm{d}V}$$
+où $\mathrm{d}m$ est le moment magnétique contenu dans $\mathrm{d}V$.
+
+Dans le cas de notre modélisation, on a simplement:
+$$A = n \valmoy{m}$$ où $n$ est la densité numérique des dipôles atomiques et $\valmoy{m}$ la valeur moyenne des moments magnétiques.
+
+\section{Problèmes possibles}
+Comme le matériau à l'origine n'a pas de moment magnétique, quand on va enter en contact avec le champ du solénoïde, il va suivre les lignes de champs et se retrouver dans le solénoïde. Problème? Il risque de ressortir expulsé avec une puissance vraiment énorme.
+\end{document}
