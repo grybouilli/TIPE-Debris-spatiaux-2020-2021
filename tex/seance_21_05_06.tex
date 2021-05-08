@@ -37,11 +37,11 @@ Un matériau paramagnétique, hors de tout champ magnétique, n'a pas de moment 
 Soumis à un champ magnétique, les moments magnétiques atomiques s'alignent selon le champs magnétique provoquant un moment magnétique global. On peut donc assimiler le matériau à ce moment magnétique $\MM$.
 
 \subsection{Aimantation}
-L'aimantation est définie comme étant la densité volumique de moment magnétique, c'est-à-dire: $$A = \frac{\mathrm{d}m}{\mathrm{d}V}$$
+L'aimantation est définie comme étant la densité volumique de moment magnétique, c'est-à-dire: $$M = \frac{\mathrm{d}m}{\mathrm{d}V}$$
 où $\mathrm{d}m$ est le moment magnétique contenu dans $\mathrm{d}V$.
 
 Dans le cas de notre modélisation, on a simplement:
-$$A = n \valmoy{m}$$ où $n$ est la densité numérique des dipôles atomiques et $\valmoy{m}$ la valeur moyenne des moments magnétiques.
+$$M = n \valmoy{m}$$ où $n$ est la densité numérique des dipôles atomiques et $\valmoy{m}$ la valeur moyenne des moments magnétiques.
 
 \section{Modélisation du matériau paramagnétique}
 \subsection{Modèle de Langevin et modèle probabiliste}
@@ -51,24 +51,35 @@ On considère un matériau paramagnétique comme un ensemble de N sites portant 
 
 Dans le modèle de Langevin, on exprime alors d'abord le moment magnétique moyen du matériau $\valmoy{m}$ pour exprimer l'aimantation. La démonstration de Langevin de 1905 amène au résultat suivant pour l'aimantation moyenne du matériau:
 
-$$\valmoy{M_z} = Nm_0L(x)$$
+$$\valmoy{M_u} = Nm_0L(x)$$
 où L est la fonction de Langevin telle que
 
 $$L(x) = \coth(x) - \frac{1}{x} \mbox{ et on a posé } x = \frac{m_0 B}{k_B T}$$
 \emph{N.B: L est donc une fonction de la température.}
 
-Ce résultat est valable pour un champ magnétique qui s'exprime uniquement selon $\vec{e_z}$. Il va falloir remanier les calculs pour adapter les résultats à un champ de la forme:
+Ce résultat est valable pour un champ magnétique qui s'exprime selon une direction $\vec{u}$. Dans notre cas, on a :
 
-$$\vect{B} = B_r \vect{e_r} + B_z \vect{e_z}$$
-(voir:
+$$\vect{B} = B_r \vect{e_r} + B_z \vect{e_z} $$
+
+donc : 
+$$\vec{u} = \frac{B_r \vect{e_r} + B_z \vect{e_z}}{\sqrt{B_r^2 + B_z^2}}$$
+
+Et on a une aimantation moyenne pour un matériau plongé dans le champ magnétique du solénoïdé fini:
+\begin{prettybox}[blue]
+    $$\vec{M} = Nm_0L(x) \frac{B_r(r,z) \vect{e_r} + B_z(r,z) \vect{e_z}}{\sqrt{B_r(r,z)^2 + B_z(r,z)^2}} $$
+avec $$L(x) = \coth(x) - \frac{1}{x} \mbox{ et on a posé } x = \frac{m_0 \sqrt{B_r(r,z)^2 + B_z(r,z)^2}}{k_B T}$$
+\end{prettybox}
+
+\emph{Références pour les calculs : }
 \begin{itemize}
     \item regarder la démo du modèle de Langevin  : \url{https://fr.wikipedia.org/wiki/Paramagn%C3%A9tisme}
     \item Infos sur la fonction de Langevin \url{https://fr.wikipedia.org/wiki/Fonction_de_Langevin}
     \item voir page 34 :  \url{https://tel.archives-ouvertes.fr/tel-01555822/document})
     \item une autre démo du modèle de Langevin : \url{http://www-chimie.u-strasbg.fr/~decomet/data/cours/magn_master_mat.pdf}
-    \item calcul du moment magnétique d'un électron : \url{https://fr.wikipedia.org/wiki/Effet_Zeeman})
+    \item calcul du moment magnétique d'un électron : \url{https://fr.wikipedia.org/wiki/Effet_Zeeman}
 \end{itemize} 
 
+\subsection{Détermination de la norme commune des moments magnétiques des sites atomiques}
 \subsection{Approximations possibles selon les conditions du milieu}
 Pour de hautes températures, l'énergie thermique est très supérieure à l'énergie magnétique et alors l'aimantation moyenne du matériau est très faible, de l'ordre de 0. Par contre, pour des températures proches de 0, on a l'expression donnée plus haut, $$A = n \valmoy{m}$$.
 
