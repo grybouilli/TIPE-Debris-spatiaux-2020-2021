@@ -1,7 +1,6 @@
 \documentclass{article}
 
 \usepackage{global}
-\chead{Modélisation dipolaire}
 
 \author{Nicolas GRY}
 
@@ -82,23 +81,27 @@ avec $$L(x) = \coth(x) - \frac{1}{x} \mbox{ et on a posé } x = \frac{m_0 \sqrt{
 \subsection{Modèle paramagnétique de Pauli pour les métaux}
 Ce modèle repose sur la répartition statistique de Fermi-Dirac sur les fermions, appliquée aux électrons des atomes des métaux. 
 
-On modélise un morceau de matériau métallique par un "gaz d'électrons". L’idée de base est considérer que les électrons sonttotalement délocalisés et l’influence des noyaux et des autres électrons est moyenné de tellesorte que le potentiel vu par par un électron est constant. 
+On modélise un morceau de matériau métallique par un "gaz d'électrons". L’idée de base est considérer que les électrons sont totalement délocalisés et l’influence des noyaux et des autres électrons est moyenné de telle sorte que le potentiel vu par par un électron est constant. 
 
 On prend pour système un parallélépipède rectangle de volume $V = l*L*h$.
 L'équation de Schrödinger devient:
 $$\Delta \Psi = 0$$
 
-Et avec des conditions périodiques dites de Born-von Karman, on arrive à montrer qu'il y a discrétisation des vecteurs d'onde qui vérifient la relation:
+Pour l'étude des solides, on utilise des conditions périodiques dites de Born-von Karman, et on arrive à montrer qu'il y a discrétisation des vecteurs d'onde qui vérifient la relation:
 $$E = \frac{\hbar ||\vect{k}||^2}{2m_e}$$
-
 où $m_e$ est la masse d'un électron.
 
-\begin{prettybox}
-    \textbf{Définition: Énergie de Fermi}
+\rule{\textwidth}{0.4pt}
+
+\begin{center}
+\textbf{Définition: Énergie de Fermi}
     
     C’est l’énergie maximale atteignable par un fermion dans l’état fondamental du système de N fermions.
-\end{prettybox}
-\emph{N.B.: Un fermion est une particule de spin demi-entier, par exemple un électron.}
+
+\emph{N.B.: Un fermion est une particule de spin demi-entier, par exemple un électron.}    
+\end{center}
+
+\rule{\textwidth}{0.4pt}
 
 À l'énergie de Fermi $E_F$ on associe le vecteur d'onde de Fermi $\vect{k_F}$. Les niveaux d'énergie d'un atome se remplissant par ordre croissant, par définition, $\vect{k_F}$ correspond au niveau d'énergie maximal. Chaque état du système à $N_e$ électrons possède deux électrons de spins opposés et sont associés à des vecteurs d'ondes variant entre $-\vect{k_F}$ et $\vect{k_F}$. On peut donc avec les conditions de Born-von Karman montrer que :
 
@@ -108,7 +111,14 @@ Ce qui permet d'exprimer l'énergie de Fermi pour n'importe quel gaz d'électron
 
 
     $$E_F = \frac{\hbar}{2m_e} \left(\frac{3\pi^2N_e}{V}\right)^{2/3}$$
-
+avec donc:
+    \begin{itemize}
+        \item $\hbar$ la constante de Planck
+        \item $m_e$ la masse d'un électron
+        \item $N_e$ le nombre d'électrons dans le gaz d'électron qui modélise le métal
+        \item $V$ le volume de matériau considéré
+    \end{itemize}
+(\emph{source: }\url{https://crppwww.epfl.ch/physgen4/repository/Notes_04.05.2009.pdf})
 
 Le paramagnétisme de Pauli donne alors le résultat suivant pour l'aimantation totale du matériau:
 
@@ -121,7 +131,7 @@ avec:
     \item $E_F$ Énergie de Fermi
 \end{itemize}
 
-\subsection{Détermination de la norme commune des moments magnétiques des sites atomiques}
+\subsection{Détermination de moments magnétiques pour divers métaux}
 \subsubsection{Pour un matériau en aluminium}
 
 \subsubsection{Pour un matériau en cuivre}
