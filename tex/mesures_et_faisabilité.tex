@@ -1,0 +1,48 @@
+\documentclass[a4paper]{article}
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\author{Maxime WIRTH}
+\title{Nouveaux ordres de grandeur}
+
+\begin{document}
+\maketitle
+
+\section{Nouvelle masse}
+Le diamètre du câble est de $D_{câble} = 4,950.10 mm$.\\
+Pour $L = 3m$, on doit avoir 202 étages de fil et pour obtenir $3000 tr/m$, on doit avoir 15 épaisseurs de fil.\\
+On peut approximer notre solénoïde par un cylindre creux de rayon intérieur $a = 1m$ et de rayon extérieur $R_{ext} = a + e$ avec $e = 15 * D_{câble} = 7.4 cm$.
+On obtient un volume de $V = 1450 L$.\\
+Avec $\rho = 5.7 * 10^{3} kg.m^{-3}$, on obtient finalement $M_{tot} = 8.244 t$.
+
+\section{Les lanceurs}
+
+\begin{tabular}{|c|c|c|}
+    \hline
+    Lanceur & Année de lancement ( ou dev ) & Charge utile (t) pour LEO \\
+    \hline
+    Long March 8 - Chine & 2020 & 7.6 \\
+    \hline
+    Starship - SpaceX & 2021 & 100-150 \\
+    \hline
+    Vulcan - USA & 2021 & 29 \\
+    \hline
+    Cyclone-4M - Ukraine & 2021 & 5 \\
+    \hline
+    Ariane 6 - UE & 2022 & 10.5 ( pour orbite de transition ) \\
+    \hline
+    Ariane 5 - UE & 1996 & 21 \\
+    \hline
+    Atlas V - USA & 2002 & 18.850 \\
+    \hline
+    Long March 5 - Chine & 2016 & 25 \\
+    \hline
+    
+\end{tabular}
+
+\end{document}
