@@ -1,15 +1,51 @@
-\documentclass{article}
+\documentclass{report}
 
 \usepackage{global}
 \graphicspath{{/home/grybouilli/TIPE/schema/}}
 \author{Nicolas GRY}
 
-\title{Modélisation dipolaire d'un matériau paramagnétique}
+\title{Étude du mouvement du déchet}
 
 \begin{document}
 \maketitle
-\section{Objectif}
-Modéliser un matériau paramagnétique comme un dipole magnétique pour étudier son mouvement dans un champs magnétique.
+\tableofcontents
+\newpage
+\chapter{Phase de déplacement dans le champ magnétique}
+\section{Mise en situation}
+\subsection{Introduction des grandeurs et notations}
+
+On considère un solénoïde caractérisé par:
+\begin{itemize}
+    \item Sa longueur $L$
+    \item Son rayon $a$
+    \item L'intensité du courant qui le traverse $i$
+    \item Son nombre de spires $n$ 
+\end{itemize}
+Ce solénoïde engendre un champ magnétique:
+ $$\vect{B} = B_r \vect{e_r} + B_z \vect{e_z}$$.
+On notera indifféremment $||\vect{B}||$ et $B$.
+
+On considère un déchet spatiale:
+\begin{itemize}
+    \item modélisé par un solide parallélépipède rectangle de volume $V=hlL$
+    \item portant un moment magnétique $\vect{p}$
+    \item de moment d'inertie $J_\theta$
+    \item de masse m
+\end{itemize} 
+On notera indifféremment $||\vect{p}||$ et $p$.
+
+On travaillera dans le repère cylindrique $(\vect{e_r},\vect{e_\theta},\vect{e_z})$ et on notera $(r,\theta,z)$ les coordonnées du déchet.
+
+\subsection{Schématisation de la situation}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.15]{schema_etude_mouvement_1.png}
+    \caption{Schéma simplifié de la situation}
+\end{figure}  
+
+On imagine que le moment magnétique $\vect{p}$ forme un angle $\alpha$ avec $\vect{e_z}$. L'objectif ici est d'étudier les variations de $\alpha$ et d'évaluer le temps que met $\vect{p}$ à s'aligner avec les lignes de champs.
+\newpage
 
 \section{Introduction à la modélisation dipolaire}
 \subsection{Cas du matériau paramagnétique}
@@ -149,6 +185,123 @@ $$a=b=2,80\,\AA$$
 $$c=4,57\,\AA$$
 et la maille a un volume de $v = 186\,\AA^3$. Le titane a 4 électrons de valence et la maille de titane a pour population 2 donc finalement:
 $$n_{Ti} = 0,043 \text{ électrons} / \AA^3$$
+
+\section{Étude littérale du mouvement}
+\subsection{Étude de l'alignement angulaire du déchet}
+
+\ulbf{Système}: {débris assimilé à un moment magnétique solide $\vect{p}$ de moment d'inertie $J_\theta$}
+
+\ulbf{Référentiel}: En lien avec le solénoïde, supposé galiléen (raisonnable au regard de la durée de l'expérience)
+
+\ulbf{Conditions initiales}
+
+À t = 0, on suppose que le déchet est incliné d'un angle $\alpha_0$ par rapport à l'axe de révolution du solénoïde. On suppose également la vitesse angulaire $\phder{\alpha}$ du déchet nulle à t = 0, ce qui est raisonnable puisque le déchet est dénué de tout mouvement dû au champ $\vect{B}(r,z)$ lorsqu'il n'y est pas soumis, i.e. à t = 0.
+
+\ulbf{Bilan des forces}
+
+\emph{NB : Il ne faut pas oublier durant cette étude que $\vect{B}$ dépend de r et de z, les variables du répère cylindrique défini dans le cadre de l'étude.}
+
+Force magnétique :
+$$\vec{F_B} = \vect{\text{grad}}(\vect{p}.\vect{B})$$
+
+\ulbf{Théorème du moment cinétique}
+
+Projeté selon $\vect{e_\theta}$ :
+\begin{align*}
+J_\theta \derived{\alpha}{t} &= \vect{\MM}(\vect{F_B}) . \vect{e_\theta} \\
+&= (\vect{p} \wedge \vect{B}).\vect{e_\theta}\\
+&= pB_r \cos(\alpha) - pB_z\sin(\alpha)
+\end{align*}
+
+On obtient l'équation différentielle suivante:
+
+\rule{\textwidth}{0.4pt}
+\begin{center}
+\ulbf{Équation différentielle du 2$^{nd}$ ordre non-linéaire à second membre non-constant:}
+$$\derived{\alpha}{t} + \frac{pB_z}{J_\theta}\sin(\alpha) = \frac{pB_r}{J_\theta} \cos(\alpha)$$    
+\end{center}
+
+\rule{\textwidth}{0.4pt}
+
+\subsubsection{Étude de la fin de l'alignement angulaire}
+On se place en premier dans la situation où $\alpha$ est considéré petit. On a alors:
+$$\derived{\alpha}{t} + \frac{pB_z}{J_\theta}\alpha = \frac{pB_r}{J_\theta} $$
+
+On pose $$\omega_0 = \sqrt{\frac{pB_z}{J_\theta}}$$
+
+\ulbf{Solution générale de l'équation homogène associée}
+
+$$\alpha_h(t) = A \cos(\omega_0 t + \varphi)$$
+
+$\, \text{ avec } A \text{ et } \varphi \text{ des constantes d'intégrations}$.
+
+\ulbf{Solution particulière de l'équation}
+
+$$\alpha_p(t) = \frac{B_r}{B_z}$$
+
+
+\ulbf{Solution générale de l'équation}
+
+$$\alpha(t) = A \cos(\omega_0 t + \varphi) + \frac{B_r}{B_z}$$
+
+\ulbf{Détermination des constantes d'intégration avec les conditions initiales}
+
+Avec:
+$$\alpha(0) = \alpha_0$$
+$$\derive{\alpha}{t} (0) = 0$$
+
+On en déduit : 
+$$A = \alpha_0  - \frac{B_r}{B_z}$$
+$$\varphi \equiv 0 \left[\pi\right] $$ 
+
+Et donc finalement :\newpage
+
+\rule{\textwidth}{0.4pt}
+\begin{center}
+\ulbf{Équation de l'angle formé entre $\vect{p}$ et $\vect{e_z}$}
+    $$\alpha(t) = \left(\alpha_0  - \frac{B_r(r,z)}{B_z(r,z)}\right) \cos(\omega_0 t) + \frac{B_r(r,z)}{B_z(r,z)}$$    
+
+\begin{itemize}
+    \item pulsation d'oscillation du système : $\omega_0 = \sqrt{\frac{pB_z}{J_\theta}}$
+    \item moment d'inertie du solide : $J_\theta = \frac{m(h^2+l^2+L^2)}{12}$
+\end{itemize}
+\end{center}
+
+\rule{\textwidth}{0.4pt}
+
+\subsubsection{Étude de l'alignement angulaire : Résolution numérique de l'équation différentielle}
+
+\subsection{Étude du déplacement du moment dans le champ magnétique}
+
+On passe ici à l'étude du déplacement du débris le long d'une ligne de champs. Pour cela, on modélise le débris comme un volume étant délimité par une surface fermée $S$ et doté d'une masse m.
+
+\ulbf{Système}: {Débris assimilé à moment magnétique $\vect{p}$}
+
+\ulbf{Référentiel}: En lien avec le solénoïde, supposé galiléen (raisonnable au regard de la durée de l'expérience)
+
+\ulbf{Conditions initiales}
+
+À t = 0, on suppose que le déchet est animé d'une vitesse initiale $\vect{v_0}$.
+
+\ulbf{Hypothèse}
+
+On travaille d'abord sans considérer la force d'attraction gravitationnelle entre le solénoïde et le débris.
+
+\ulbf{Bilan des forces}
+
+\emph{NB : Il ne faut pas oublier durant cette étude que $\vect{B}$ dépend de r et de z, les variables du répère cylindrique défini dans le cadre de l'étude.}
+
+\underline{Force magnétique d'aimantation :} 
+$$\vect{F} = \vect{grad}(\vect{p}.\vect{B})$$
+
+On commence les calculs en supposant $\vect{p}$ constant.
+
+\ulbf{Principe fondamental de la dynamique}
+
+On considère qu'il n'y a pas de perte de masse ce qui permet d'écrire le PDF sous sa forme bien connue:
+
+$$m\derived{\vect{OG}}{t} = \vect{F}$$
+
 
 \section{Problèmes possibles}
 Comme le matériau à l'origine n'a pas de moment magnétique, quand on va enter en contact avec le champ du solénoïde, il va suivre les lignes de champs et se retrouver dans le solénoïde. Problème? Il risque de ressortir expulsé avec une puissance vraiment énorme.
