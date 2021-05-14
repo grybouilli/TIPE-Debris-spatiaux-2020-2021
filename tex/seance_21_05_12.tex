@@ -58,11 +58,7 @@ Soumis à un champ magnétique, les moments magnétiques atomiques s'alignent se
 L'aimantation est définie comme étant la densité volumique de moment magnétique, c'est-à-dire: $$M = \frac{\mathrm{d}m}{\mathrm{d}V}$$
 où $\mathrm{d}m$ est le moment magnétique contenu dans $\mathrm{d}V$.
 
-Dans le cas du paramagnétisme, elle représente le moment dipolaire du matériau paramagnétique considéré. On a la relation:
-
-$$M = \chi B$$
-
-où $B$ est l'intensité du champ magnétique extérieur auquel on soumet le matériau et $\chi$ la susceptibilité magnétique du matériau.
+\textbf{Dans le cas du paramagnétisme, elle représente le moment dipolaire du matériau paramagnétique considéré.}
 
 \section{Modélisation du matériau paramagnétique}
 \subsection{Modèle de Langevin}
@@ -130,7 +126,7 @@ $$\frac{N_e}{V} = \frac{k_F^3}{3\pi^2}$$
 Ce qui permet d'exprimer l'énergie de Fermi pour n'importe quel gaz d'électrons:
 
 
-    $$E_F(N_e) = \frac{\hbar}{2m_e} \left(\frac{3\pi^2N_e}{V}\right)^{2/3}$$
+    $$E_F(N_e) = \frac{\hbar^2}{2m_e} \left(\frac{3\pi^2N_e}{V}\right)^{2/3}$$
 avec donc:
     \begin{itemize}
         \item $\hbar$ la constante de Planck
@@ -142,13 +138,13 @@ avec donc:
 
 \rule{\textwidth}{0.4pt}
 \begin{center}
-Le paramagnétisme de Pauli donne alors le résultat suivant pour l'\textbf{aimantation totale du matériau}:
+Le paramagnétisme de Pauli donne alors le résultat suivant pour l'\textbf{aimantation totale du matériau} (ou autrement dit, son moment magnétique globale):
 
-$$M = \frac{3\mu_B^2 N_e B}{2 E_F(N_e)}$$
+$$M = \frac{3\mu_B^2 N_e B}{2 E_F(N_e)} = \frac{3\mu_B^2 \overline{n} V B}{2 E_F(\overline{n} V)}$$
 
 \begin{itemize}
     \item $\mu_B$ le magnéton de Bohr
-    \item $N_e$ le nombre de sites magnétiques par unité de volume
+    \item $N_e = \overline{n} V$ le nombre d'électrons dans le volume V, pour une population $\overline{n}$
     \item $B$ la norme du champ magnétique extérieur
     \item $E_F(N_e)$ Énergie de Fermi pour un gaz de $N_e$ électrons
 \end{itemize}    
@@ -305,7 +301,7 @@ On travaille d'abord sans considérer la force d'attraction gravitationnelle ent
 \underline{Force magnétique d'aimantation :} 
 $$\vect{F} = \vect{grad}(\vect{p}.\vect{B})$$
 
-On commence les calculs en supposant $\vect{p}$ constant.
+Dans cette phase, $\vect{p}$ est aligné avec $\vect{B}$.
 
 \ulbf{Principe fondamental de la dynamique}
 
