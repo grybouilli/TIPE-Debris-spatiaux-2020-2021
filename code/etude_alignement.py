@@ -7,7 +7,8 @@ m = 10
 h = 5
 l = 5
 L = 5
-def angle_alpha_moment(t,r,z,p,J_theta,alpha0):
+# prends les variables de l'espace temps, la norme du moment magnétique, le moment d'inertie et l'angle initial
+def angle_alpha_moment(r,z,t,p,J_theta,alpha0):
     bz = mg.Bz(r,z)
     br = mg.Br(r,z)
     pulsation = np.sqrt(p*bz) / J_theta
@@ -15,6 +16,7 @@ def angle_alpha_moment(t,r,z,p,J_theta,alpha0):
     alpha_thau = np.arccos(1/(alpha0*(bz/br) - 1))
     return (alpha0 - br/bz) * np.cos(pulsation * t) + br/bz , alpha_thau/pulsation
 
+'''
 r = 100
 z = 1
 moment_p = aim.norme_M(r,z)
@@ -26,7 +28,7 @@ alpha = []
 thau = []
 
 for a in alpha_0:
-    al,th =angle_alpha_moment(t,r,z,moment_p,J,a)
+    al,th =angle_alpha_moment(r,z,t,moment_p,J,a)
     alpha.append(al)
     thau.append(th)
 plt.figure()
@@ -42,3 +44,4 @@ plt.xlabel('time (s)')
 plt.ylabel('alpha (rad)')
 plt.legend()
 plt.show()
+'''
