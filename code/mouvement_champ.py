@@ -25,7 +25,7 @@ def force_magnetique(r,z,t,alpha0):
     aalpha,thau = al.angle_alpha_moment(r,z,t,norme_p,J_INERTIE,alpha0)
 
     p_r,p_z= lambda r,z : np.sin(alpha(r,z)) * aim.norme_M(r,z), lambda r,z: np.cos(alpha(r,z)) * aim.norme_M(r,z)  #fonctions
-    
+
     pp_r,pp_z = p_r(r,z),p_z(r,z)   #valeurs numériques
 
     dp_r_dr , dp_r_dz = derive_r(p_r)(r,z), derive_z(p_r)(r,z)  #valeurs numériques
@@ -42,4 +42,7 @@ def force_magnetique(r,z,t,alpha0):
     cst2_r = pp_r * db_r_dr + pp_z * db_r_dz
     cst2_z = pp_r * db_z_dr + pp_z * db_z_dz
 
-    
+    cst3_r = br * dp_r_dr + bz * dp_r_dz 
+    cst3_z = br * dp_z_dr + bz * dp_z_dz
+
+    return cst1_r + cst2_r + cst3_r, cst1_z + cst2_z + cst3_z
