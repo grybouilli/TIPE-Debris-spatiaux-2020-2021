@@ -6,29 +6,21 @@ from numpy.core.defchararray import upper
 '''
 derivée partielle de la fonction u selon r, où :
 - u est une fonction à deux variables de l'espace cylindrique
--derive_r renvoie une fonction prenant deux arguments, r et z les coordonnées de l'espace cylindrique, où r est nécessairement un tableau
+-derive_r renvoie une fonction prenant deux arguments, r et z les coordonnées de l'espace cylindrique
 '''
-def derive_r(u):
+def derive_r(u, eps):
     def u_prime_r(r,z):
-        n = len(r)
-        up = np.zeros(n)
-        for i in range(n-1):
-            up[i] = (u(r[i+1], z) - u(r[i],z)) / (r[i+1]-r[i]) 
-        return up
+        return (u(r+eps,z)-u(r-eps,z)) / (eps) 
     return u_prime_r
 
 '''
 derivée partielle de la fonction u selon z, où :
 - u est une fonction à deux variables de l'espace cylindrique
--derive_z renvoie une fonction prenant deux arguments, r et z les coordonnées de l'espace cylindrique, où z est nécessairement un tableau
+-derive_z renvoie une fonction prenant deux arguments, r et z les coordonnées de l'espace cylindrique
 '''
-def derive_z(u):
+def derive_z(u, eps):
     def u_prime_z(r,z):
-        n = len(z)
-        up = np.zeros(n)
-        for i in range(n-1):
-            up[i] = (u(r, z[i+1]) - u(r,z[i])) / (z[i+1]-z[i]) 
-        return up
+        return (u(r,z+eps)-u(r,z-eps)) / (eps) 
     return u_prime_z
 
 def gradient_cyl(u):
