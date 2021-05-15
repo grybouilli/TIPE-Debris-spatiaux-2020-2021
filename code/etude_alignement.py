@@ -11,7 +11,7 @@ L = 5
 def angle_alpha_moment(r,z,t,p,J_theta,alpha0):
     bz = mg.Bz(r,z)
     br = mg.Br(r,z)
-    pulsation = np.sqrt(p*bz) / J_theta
+    pulsation = np.sqrt(p*abs(bz) / J_theta)
 
     alpha_thau = np.arccos(1/(alpha0*(bz/br) - 1))
     return (alpha0 - br/bz) * np.cos(pulsation * t) + br/bz , alpha_thau/pulsation

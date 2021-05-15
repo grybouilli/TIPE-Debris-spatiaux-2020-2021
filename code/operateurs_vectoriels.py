@@ -32,3 +32,5 @@ Soit u = u_r e_r + u_z e_z un vecteur en coordonnées cylindriques, rotationnel 
 def rotationnel(u_r,u_z):
     return derive_z(u_r) - derive_r(u_z)
 
+def norme(u_r,u_z):
+    return np.sqrt(u_r**2 + u_z**2)
