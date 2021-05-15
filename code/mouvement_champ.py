@@ -15,12 +15,17 @@ LONGUEUR = 5
 LARGEUR = 5
 J_INERTIE = MASSE*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
 
+
+
 def force_magnetique(r,z,t,alpha0):
-
+    def alpha(r,z):
+        return al.angle_alpha_moment(r,z,t,norme_p,J_INERTIE,alpha0)
+        
     norme_p = aim.norme_M(r,z)
-    alpha,thau = al.angle_alpha_moment(r,z,t,norme_p,J_INERTIE,alpha0)
+    aalpha,thau = al.angle_alpha_moment(r,z,t,norme_p,J_INERTIE,alpha0)
 
-    p_r,p_z= np.sin(alpha) * aim.norme_M, np.cos(alpha) * aim.norme_M   #fonctions
+    p_r,p_z= lambda r,z : np.sin(alpha(r,z)) * aim.norme_M(r,z), lambda r,z: np.cos(alpha(r,z)) * aim.norme_M(r,z)  #fonctions
+    
     pp_r,pp_z = p_r(r,z),p_z(r,z)   #valeurs numériques
 
     dp_r_dr , dp_r_dz = derive_r(p_r)(r,z), derive_z(p_r)(r,z)  #valeurs numériques
