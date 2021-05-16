@@ -23,14 +23,17 @@ def force_magnetique(r,z,t,alpha0):
         return al.angle_alpha_moment(rr,zz,t,abs(norme_p),J_INERTIE,alpha0)
         
     norme_p = aim.norme_M(r,z)
-    aalpha,thau = alpha(r,z)
+    aalpha = alpha(r,z)
 
-    p_r,p_z= lambda r,z : np.sin(alpha(r,z)) * aim.norme_M(r,z), lambda r,z: np.cos(alpha(r,z)) * aim.norme_M(r,z)  #fonctions
-
-    pp_r,pp_z = p_r(r,z),p_z(r,z)   #valeurs numériques
-
-    dp_r_dr , dp_r_dz = op.derive_r(p_r,10**-6)(r,z), op.derive_z(p_r,10**-6)(r,z)  #valeurs numériques
-    dp_z_dr , dp_z_dz = op.derive_r(p_z,10**-6)(r,z), op.derive_z(p_z,10**-6)(r,z)  #valeurs numériques
+    p_r = lambda rr,zz: np.sin(alpha(rr,zz)) * aim.norme_M(rr,zz)
+    p_z = lambda rr,zz: np.cos(alpha(rr,zz)) * aim.norme_M(rr,zz)  
+    
+    pp_r = p_r(r,z)
+    pp_z = p_z(r,z)  
+    print(len(pp_r))
+    dp_r_dr , dp_r_dz = op.derive_r(p_r,10**-6)(r,z), op.derive_z(p_r,10**-6)(r,z) 
+    print(len(dp_r_dr))
+    dp_z_dr , dp_z_dz = op.derive_r(p_z,10**-6)(r,z), op.derive_z(p_z,10**-6)(r,z)  
 
     br = mg.Br(r,z)
     bz = mg.Bz(r,z)
@@ -45,7 +48,6 @@ def force_magnetique(r,z,t,alpha0):
 
     cst3_r = br * dp_r_dr + bz * dp_r_dz 
     cst3_z = br * dp_z_dr + bz * dp_z_dz
-
     return cst1_r + cst2_r + cst3_r, cst1_z + cst2_z + cst3_z
 
 
@@ -62,7 +64,7 @@ r = np.linspace(-11, 11, n)
 z = np.linspace(-11, 15, n)
 r, z = np.meshgrid(r, z)
 
-Fr,Fz = force_magnetique(r,z,0,0)
+Fr,Fz = force_magnetique(abs(r),abs(z),0,0)
 F = op.norme(Fr,Fz)
 
 planeR = axr.plot_surface(r, z, Fr, label = 'force magnétique sur r', color = 'r')
