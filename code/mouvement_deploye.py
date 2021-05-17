@@ -25,7 +25,7 @@ plt.colorbar(im)
 for i in range(1, n, 10):
     Fr,Fz = mvt.force_magnetique(abs(r),abs(z),i,0)
     F = op.norme(Fr,Fz)
-    plt.pcolor(r,z,F)
+    plt.pcolor(r,z,F, vmin=0, vmax = 10**5)
     plt.pause(0.01)
     
 plt.show()
