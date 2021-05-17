@@ -11,28 +11,25 @@ import librairies.display as disp
 
 
 MASSE = 10
-HAUTEUR = 5
-LONGUEUR = 5
-LARGEUR = 5
+HAUTEUR = 0.5
+LONGUEUR = 0.5
+LARGEUR = 0.5
 J_INERTIE = MASSE*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
 
-
+n_al = 0.181/(10**-30) #(électrons par m^3)
 
 def force_magnetique(r,z,t,alpha0):
     def alpha(rr,zz):
         return al.angle_alpha_moment(rr,zz,t,abs(norme_p),J_INERTIE,alpha0)
-        
-    norme_p = aim.norme_M(r,z)
-    aalpha = alpha(r,z)
-
-    p_r = lambda rr,zz: np.sin(alpha(rr,zz)) * aim.norme_M(rr,zz)
-    p_z = lambda rr,zz: np.cos(alpha(rr,zz)) * aim.norme_M(rr,zz)  
+    N_e = n_al * HAUTEUR * LONGUEUR * LARGEUR
+    norme_p = aim.norme_M_pop(r,z,N_e)
+    
+    p_r = lambda rr,zz: np.sin(alpha(rr,zz)) * aim.norme_M_pop(r,z,N_e)
+    p_z = lambda rr,zz: np.cos(alpha(rr,zz)) * aim.norme_M_pop(r,z,N_e)  
     
     pp_r = p_r(r,z)
     pp_z = p_z(r,z)  
-    print(len(pp_r))
     dp_r_dr , dp_r_dz = op.derive_r(p_r,10**-6)(r,z), op.derive_z(p_r,10**-6)(r,z) 
-    print(len(dp_r_dr))
     dp_z_dr , dp_z_dz = op.derive_r(p_z,10**-6)(r,z), op.derive_z(p_z,10**-6)(r,z)  
 
     br = mg.Br(r,z)
@@ -52,22 +49,22 @@ def force_magnetique(r,z,t,alpha0):
 
 
 
-figr = plt.figure()
-figz = plt.figure()
+""" figr = plt.figure()
+figz = plt.figure() """
 fig = plt.figure()
-axr = figr.gca(projection='3d')
-axz = figz.gca(projection='3d')
+""" axr = figr.gca(projection='3d')
+axz = figz.gca(projection='3d') """
 ax = fig.gca(projection='3d')
 
 n = 1000
-r = np.linspace(-11, 11, n)
-z = np.linspace(-11, 15, n)
+r = np.linspace(-5, 5, n)
+z = np.linspace(-5, 5, n)
 r, z = np.meshgrid(r, z)
 
 Fr,Fz = force_magnetique(abs(r),abs(z),0,0)
 F = op.norme(Fr,Fz)
-
+""" 
 planeR = axr.plot_surface(r, z, Fr, label = 'force magnétique sur r', color = 'r')
-planeZ = axz.plot_surface(r, z, Fz, label = 'force magnétique sur z', color = 'g')
+planeZ = axz.plot_surface(r, z, Fz, label = 'force magnétique sur z', color = 'g') """
 planeNorme = ax.plot_surface(r, z, F, label = 'force magnétique (norme)', color = 'b')
 plt.show()
