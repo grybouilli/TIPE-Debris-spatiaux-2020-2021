@@ -18,11 +18,18 @@ e = 1.602 * 10**(-19) #C
 #Magnéton de Bohr
 MU_B = e * H_BARRE / (2 * m_e) #J/T
 
+#n est la densité de population d'électrons
 def E_Fermi(n):
     a = (3 * np.pi*np.pi * n) ** (2/3)
     return H_BARRE**2 * a / (2 * m_e)
 
 EF_NBTI = E_Fermi(n_NBTI) #J
+
+#N est le nombre d'électrons
+def norme_M_pop(r,z,N):
+    B = mg.normeB(r, z)
+    EF = E_Fermi(N)
+    return 3 * MU_B**2 * N * B / (2*EF)
 
 def norme_M(r, z):
     B = mg.normeB(r, z)
