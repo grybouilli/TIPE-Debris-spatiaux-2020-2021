@@ -23,7 +23,7 @@ def force_magnetique(r,z,t,alpha0):
         return al.angle_alpha_moment(rr,zz,t,abs(norme_p),J_INERTIE,alpha0)
     N_e = n_al * HAUTEUR * LONGUEUR * LARGEUR
     norme_p = aim.norme_M_pop(r,z,N_e)
-    
+
     p_r = lambda rr,zz: np.sin(alpha(rr,zz)) * aim.norme_M_pop(r,z,N_e)
     p_z = lambda rr,zz: np.cos(alpha(rr,zz)) * aim.norme_M_pop(r,z,N_e)  
     
@@ -50,21 +50,20 @@ def force_magnetique(r,z,t,alpha0):
 
 
 """ figr = plt.figure()
-figz = plt.figure() """
+figz = plt.figure()
 fig = plt.figure()
-""" axr = figr.gca(projection='3d')
-axz = figz.gca(projection='3d') """
-ax = fig.gca(projection='3d')
+ axr = figr.gca(projection='3d')
+axz = figz.gca(projection='3d') 
+ax = fig.gca(projection='3d')"""
 
 n = 1000
 r = np.linspace(-5, 5, n)
 z = np.linspace(-5, 5, n)
 r, z = np.meshgrid(r, z)
-
+""" 
 Fr,Fz = force_magnetique(abs(r),abs(z),0,0)
 F = op.norme(Fr,Fz)
-""" 
 planeR = axr.plot_surface(r, z, Fr, label = 'force magnétique sur r', color = 'r')
-planeZ = axz.plot_surface(r, z, Fz, label = 'force magnétique sur z', color = 'g') """
+planeZ = axz.plot_surface(r, z, Fz, label = 'force magnétique sur z', color = 'g') 
 planeNorme = ax.plot_surface(r, z, F, label = 'force magnétique (norme)', color = 'b')
-plt.show()
+plt.show() """
