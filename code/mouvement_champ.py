@@ -67,3 +67,21 @@ planeR = axr.plot_surface(r, z, Fr, label = 'force magnétique sur r', color = '
 planeZ = axz.plot_surface(r, z, Fz, label = 'force magnétique sur z', color = 'g') 
 planeNorme = ax.plot_surface(r, z, F, label = 'force magnétique (norme)', color = 'b')
 plt.show() """
+
+w = 11/10 * mg.L
+
+figb, axb = plt.subplots()
+
+t = 0
+alpha0 = 0
+
+r, z = np.arange(-w, w, 0.1), np.arange(-w, w, 0.1)
+r, z = np.meshgrid(r, z)
+U, V = force_magnetique(abs(r),abs(z),t,alpha0)[0], force_magnetique(abs(r),abs(z),t,alpha0)[1]
+
+axb.xaxis.set_ticks([])
+axb.yaxis.set_ticks([])
+
+axb.quiver(r, z, U, V)
+
+plt.show()
