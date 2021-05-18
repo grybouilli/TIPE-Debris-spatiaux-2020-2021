@@ -23,7 +23,6 @@ def position(m, alpha0, p0, tf, n):
         t += h
         P.append(p)
         T.append(t)
-    print(P)
     pos_r = [e[0] for e in P]
     pos_z = [e[1] for e in P]
     return (pos_r, pos_z, T)
