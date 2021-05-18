@@ -70,11 +70,13 @@ plt.show() """
 
 w = 11/10 * mg.L
 
-figb, axb = plt.subplots()
+
 
 t = 0
 alpha0 = 0
 
+""" 
+figb, axb = plt.subplots()
 r, z = np.arange(-w, w, 0.1), np.arange(-w, w, 0.1)
 r, z = np.meshgrid(r, z)
 U, V = force_magnetique(abs(r),abs(z),t,alpha0)[0], force_magnetique(abs(r),abs(z),t,alpha0)[1]
@@ -84,4 +86,4 @@ axb.yaxis.set_ticks([])
 
 axb.quiver(r, z, U, V)
 
-plt.show()
+plt.show() """
