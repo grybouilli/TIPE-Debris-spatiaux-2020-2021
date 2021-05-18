@@ -75,7 +75,7 @@ w = 11/10 * mg.L
 t = 0
 alpha0 = 0
 
-""" 
+
 figb, axb = plt.subplots()
 r, z = np.arange(-w, w, 0.1), np.arange(-w, w, 0.1)
 r, z = np.meshgrid(r, z)
@@ -85,5 +85,3 @@ axb.xaxis.set_ticks([])
 axb.yaxis.set_ticks([])
 
 axb.quiver(r, z, U, V)
-
-plt.show() """
