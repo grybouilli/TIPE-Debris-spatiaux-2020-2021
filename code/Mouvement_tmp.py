@@ -10,25 +10,22 @@ def accél (m, r,z,t, alpha0):
 
 def position(m, alpha0, p0, tf, n):
     h = tf/n #pas
-    p = p0
-    y = (0,0) #vitesse initiale
-    t = 0
-    P = [p0]
-    T = [0]
-    for k in range (n):
-        a_r , a_z = accél(m, p[0], p[1], t, alpha0)
-        y = (y[0] + h*a_r, y[1] + h*a_z)
-        p = (p[0] + h*y[0], p[1] + h*y[1])
-        
-        t += h
-        P.append(p)
-        T.append(t)
-    pos_r = [e[0] for e in P]
-    pos_z = [e[1] for e in P]
-    return (pos_r, pos_z, T)
+    Y = np.zeros((2, n)) #vitesse initiale
+    P = np.zeros((2, n))
+    P[0][0], P[1][0] = p0
+    T = np.zeros(n)
+    for k in range (1, n):
+        a_r , a_z = accél(m, P[0][k-1], P[1][k-1], T[k-1], alpha0)
+        Y[0][k] = Y[0][k-1] + h*a_r
+        Y[1][k] = Y[1][k-1] + h*a_z
+        P[0][k] = P[0][k-1] + h*Y[0][k] #je sais pas si c'est k ou k-1 dans le Y, à vérifier
+        P[1][k] = P[1][k-1] + h*Y[1][k]
+        T[k] = k*h
+    return (P[0], P[1], T)
 
-pos_r, pos_z, T = position(0.1, 0.1, (1.5, 0), 10, 100)
+pos_r, pos_z, T = position(0.1, 0.1, (1.5, 0), 10, 5000)
 print(pos_r)
 print(pos_z)
 
-    
+plt.plot(pos_r, pos_z)
+plt.show()
