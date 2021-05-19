@@ -12,9 +12,9 @@ import librairies.display as disp
 
 M_VOL_ALU = 2700 #kg/m^3
 
-HAUTEUR = 0.5
-LONGUEUR = 0.5
-LARGEUR = 0.5
+HAUTEUR = 0.05
+LONGUEUR = 0.05
+LARGEUR = 0.05
 VOLUME  = HAUTEUR * LONGUEUR*LARGEUR
 MASSE_AL = M_VOL_ALU * VOLUME
 J_INERTIE = MASSE_AL*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
@@ -88,4 +88,4 @@ U, V = force_magnetique(abs(r),abs(z),t,alpha0)[0], force_magnetique(abs(r),abs(
 axb.xaxis.set_ticks([])
 axb.yaxis.set_ticks([])
 
-axb.quiver(r, z, U, V)
+axb.quiver(r, z, U, V, alpha=0.5,color='grey')

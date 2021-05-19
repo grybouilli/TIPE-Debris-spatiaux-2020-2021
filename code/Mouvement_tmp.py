@@ -23,6 +23,7 @@ def position(m, alpha0, p0, tf, n):
         T[k] = k*h
     return (P[0], P[1], T)
 
+
 pos_r, pos_z, T = position(0.1, 0.1, (0.5, 3), 0.01, 10000)
 print(pos_r)
 print(pos_z)
