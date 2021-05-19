@@ -10,7 +10,7 @@ from utilities import *
 #Rayon du solénoïde (m):
 a = 1
 #Intensité du courant dans les filaments (A):
-i = 100000
+i = 10000
 #Longueur du solénoïde (m):
 L = 3
 #Nombre de tour par mètre (tours.m*(-1)) (on peut avoir un diamètre de fil de 0.3mm):
@@ -56,8 +56,10 @@ def Br(r,z):
     xim = z-L/2
     k_pos = (4*a*r)/((xip)**2 + (a+r)**2)
     k_neg = (4*a*r)/((xim)**2 + (a+r)**2)
+    sqrt_k_pos = np.sqrt(k_pos)
+    sqrt_k_neg = np.sqrt(k_neg)
 
-    return c * np.sqrt(a/r) * (((2-k_pos) * K_int(np.sqrt(k_pos))/(2*np.sqrt(k_pos)) -  E_int(np.sqrt(k_pos)) / np.sqrt(k_pos) ) - ( (2-k_neg) * K_int(np.sqrt(k_neg))/(2*np.sqrt(k_neg)) -  E_int(np.sqrt(k_neg)) / np.sqrt(k_neg))) 
+    return c * np.sqrt(a/r) * (( K_int(sqrt_k_pos) * ((2-k_pos)/(2*sqrt_k_pos)) -  (E_int(sqrt_k_pos) / sqrt_k_pos) ) - (  K_int(sqrt_k_neg)*((2-k_neg)/(2*sqrt_k_neg)) -  (E_int(sqrt_k_neg) / sqrt_k_neg))) 
     
 def Bz(r,z):
     c1 = (mu0 * n * i)/4
