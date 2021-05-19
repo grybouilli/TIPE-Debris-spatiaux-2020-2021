@@ -88,4 +88,4 @@ U, V = force_magnetique(abs(r),abs(z),t,alpha0)[0], force_magnetique(abs(r),abs(
 axb.xaxis.set_ticks([])
 axb.yaxis.set_ticks([])
 
-axb.quiver(r, z, U, V)
+axb.quiver(r, z, U, V, alpha=0.5,color='grey')
