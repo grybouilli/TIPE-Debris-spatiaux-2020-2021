@@ -46,7 +46,7 @@ J = m*(h**2+l**2+L**2) / 12
 
 
 '''
-t = np.linspace(0,10, 10000)
+t = np.linspace(0,50, 10000)
 alpha_0 = [np.pi/3, np.pi/4, np.pi/6]
 alpha = []
 
@@ -69,7 +69,7 @@ alpha = []
 temps = 0
 
 for al0 in alpha0:
-    al, T = alpha_reel(r, z, moment_p, J, al0, 50, 1000)
+    al, T = alpha_reel(r, z, moment_p, J, al0, 50, 10000)
     alpha.append(al)
     temps = T
 

@@ -1,0 +1,109 @@
+% =============   PACKAGES   ============= %
+
+% ----------       FORMAT       ----------
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[ utf8]{ inputenc }
+\usepackage{ lmodern }
+\usepackage{ microtype }
+\usepackage[colorlinks=false, hidelinks]{ hyperref }
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{prettybox}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+
+% ----------       MATHS       ----------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+\usepackage{ esint }
+
+% ----------       CODE         ----------
+
+\usepackage[outputdir=out]{minted}
+\usepackage{forest}
+
+% =============   PARAMETERS   ============= %
+
+% ----------       FORMAT       ----------
+% style entête et bas de page
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{MCOT}
+\lhead{Romain MAURICE}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+
+% style des sectionnages
+\titleformat{\part}[hang]{\bfseries\huge}{\thepart}{2pc}{}
+\titleformat{\chapter}[hang]{\bfseries\LARGE}{\thechapter}{2pc}{}
+\titleformat{\section}[hang]{\bfseries\Large}{\thesection}{2pc}{}
+\titleformat{\subsection}[hang]{\bfseries\large}{\thesubsection}{2pc}{} 
+\titleformat{\subsubsection}[hang]{\bfseries\normalsize}{\thesubsubsection}{2pc}{} 
+\definecolor{RqColor}{RGB}{30,110,50}
+
+% style des paragraphes
+\setlength{\parskip}{6pt}
+
+% ----------       MATHS        ----------
+
+
+% ----------       CODE         ----------
+\setminted[python]{linenos,frame=lines,framerule=1pt,framesep=10pt}
+\usemintedstyle[python]{friendly}
+
+% =============   COMMANDS   ============= %
+
+% ----------       FORMAT       ----------
+
+\newcommand{\vers}{$\longrightarrow \mbox{}$}
+\newcommand{\mdot}{•}           % middle dot
+\newcommand{\edot}{$\circ$}     % empty dot
+\newcommand{\oeuvre}[1]{\emph{"\underline{#1}"}}
+\newcommand{\ulbf}[1]{\textbf{\underline{#1}}}
+
+% ----------       MATHS        ----------
+
+\newcommand\maitrise{\emph{Matrisée. }}
+\newcommand\bien{Bien. }
+\newcommand\refaire{\textcolor{magenta}{À refaire. }}
+\newcommand{\revoircpt}{\textbf{\textcolor{red}{À revoir complètement. }}}
+
+\newcommand\vect[1]{\overset{\to}{#1}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\func}{}
+\newcommand{\derive}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\derived}[2]{\frac{\mathrm{d^2}#1}{\mathrm{d}#2^2}}
+\newcommand{\phder}[1]{\overset{\cdot}{#1}}
+\newcommand{\phdder}[1]{\overset{..}{#1}}
+
+\newcommand\NN{\mathbb{N}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand{\valmoy}[1]{\mbox{\textlangle} #1\mbox{\textrangle}}
+% ----------       CODE         ----------
+\newcommand{\cobl}[1]{\begin{codeblock}#1\end{codeblock}}
+
+% ----------       FRANÇAIS     ----------
+
+\newcommand\monol[1]{\emph{Monologue sur #1}}
+
+% =============   ENVIRONMENT   ============= %
+% ----------       FORMAT       ----------
+% ----------       MATHS        ----------
+% ----------       CODE         ----------
+
+\newenvironment{codeblock}{
+\fontfamily{qcr}\selectfont}
+{\fontfamily{cmr}\selectfont}
