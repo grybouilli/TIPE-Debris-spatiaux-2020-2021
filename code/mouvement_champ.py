@@ -20,7 +20,7 @@ n_al = 0.181/(10**-30) #(électrons par m^3)
 
 def force_magnetique(r,z,t,alpha0):
     def alpha(rr,zz):
-        return al.angle_alpha_moment(rr,zz,t,abs(norme_p),J_INERTIE,alpha0)
+        return al.angle_moment_petit(rr,zz,t,abs(norme_p),J_INERTIE,alpha0)
     N_e = n_al * HAUTEUR * LONGUEUR * LARGEUR
     norme_p = aim.norme_M_pop(r,z,N_e)
 
@@ -52,7 +52,7 @@ def force_magnetique(r,z,t,alpha0):
 """ figr = plt.figure()
 figz = plt.figure()
 fig = plt.figure()
- axr = figr.gca(projection='3d')
+axr = figr.gca(projection='3d')
 axz = figz.gca(projection='3d') 
 ax = fig.gca(projection='3d')"""
 
