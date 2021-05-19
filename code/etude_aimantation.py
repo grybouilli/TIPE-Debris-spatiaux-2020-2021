@@ -10,19 +10,23 @@ from mpl_toolkits.mplot3d import Axes3D
 import librairies.display as disp
 import matplotlib as mpl
 
-MASSE = 10
+M_VOL_ALU = 2700 #kg/m^3
+
+
 HAUTEUR = 0.5
 LONGUEUR = 0.5
 LARGEUR = 0.5
-J_INERTIE = MASSE*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
+VOLUME  = HAUTEUR * LONGUEUR*LARGEUR
+MASSE_AL = M_VOL_ALU * VOLUME
+J_INERTIE = MASSE_AL*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
 
 n_al = 0.181/(10**-30) #(électrons par m^3)
 n_zn = 0.143/(10**-30)
 n_ti = 0.043/(10**-30)
 
-N_e_al = n_al * HAUTEUR * LONGUEUR * LARGEUR
-N_e_zn = n_zn * HAUTEUR * LONGUEUR * LARGEUR
-N_e_ti = n_ti * HAUTEUR * LONGUEUR * LARGEUR
+N_e_al = n_al * VOLUME
+N_e_zn = n_zn * VOLUME
+N_e_ti = n_ti * VOLUME
 
 
 n = 1000
