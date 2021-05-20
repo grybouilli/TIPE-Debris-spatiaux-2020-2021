@@ -20,11 +20,11 @@ MASSE_AL = M_VOL_ALU * VOLUME
 J_INERTIE = MASSE_AL*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
 
 
-n_al = 0.181/(10**-30) #(électrons par m^3)
+n_al = 0.181/(10**30) #(électrons par m^3)
 
 def force_magnetique(r,z,t,alpha0):
     def alpha(rr,zz):
-        return al.alpha_reel(rr,zz,abs(norme_p),J_INERTIE,alpha0, t, 1000)[0][-1]   
+        return al.angle_moment_petit(rr,zz,t,abs(norme_p),J_INERTIE,alpha0)   
     N_e = n_al * HAUTEUR * LONGUEUR * LARGEUR
     norme_p = aim.norme_M_pop(r,z,N_e)
 

@@ -44,7 +44,7 @@ z = 1
 moment_p = aim.norme_M(r,z)
 J = m*(h**2+l**2+L**2) / 12
 
-
+#alpha approché aux petits angles
 '''
 t = np.linspace(0,50, 10000)
 alpha_0 = [np.pi/3, np.pi/4, np.pi/6]
@@ -64,6 +64,9 @@ plt.legend()
 plt.show()
 '''
 
+
+#alpha réel
+'''
 alpha0 = [0, np.pi/6, np.pi/4, np.pi/3, np.pi/2]
 alpha = []
 temps = 0
@@ -84,3 +87,4 @@ plt.xlabel('temps (s)')
 plt.ylabel('alpha (rad)')
 plt.legend()
 plt.show()
+'''
