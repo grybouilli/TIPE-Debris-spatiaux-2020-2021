@@ -10,7 +10,6 @@ def const_temps(r, z):
     j = mv.J_INERTIE
     return j/(p*bz)
 
-
 def accél (m, r,z,t, alpha0):
     f_r, f_z = mv.force_magnetique(abs(r), abs(z), t, alpha0)
     f_r *= (1/m)
