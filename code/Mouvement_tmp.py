@@ -65,5 +65,4 @@ plt.show()
 '''
 pas de temps adaptatif
 
-carte de champ // lignes de champ ??
 '''
