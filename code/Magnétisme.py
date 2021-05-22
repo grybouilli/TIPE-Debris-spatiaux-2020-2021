@@ -10,7 +10,7 @@ from utilities import *
 #Rayon du solénoïde (m):
 a = 1
 #Intensité du courant dans les filaments (A):
-i = 10000
+i = 2500
 #Longueur du solénoïde (m):
 L = 3
 #Nombre de tour par mètre (tours.m*(-1)) (on peut avoir un diamètre de fil de 0.3mm):
