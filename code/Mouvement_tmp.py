@@ -1,6 +1,14 @@
 import mouvement_champ as mv
 import matplotlib.pyplot as plt
+import aimantation as aim
+import Magnétisme as mg
 import numpy as np
+
+def const_temps(r, z):
+    p = aim.norme_M_pop(r, z, mv.n_al)
+    bz = mg.Bz(r, z)
+    j = mv.J_INERTIE
+    return j/(p*bz)
 
 def accél (m, r,z,t, alpha0):
     f_r, f_z = mv.force_magnetique(abs(r), abs(z), t, alpha0)
