@@ -44,3 +44,5 @@ R1, Z1 = ligne_champ(0.9, 0, h)
 plt.plot(R1, Z1, color = "r")
 plt.plot(-R1, Z1, color = "r")
 plt.plot(np.zeros(2 * len(r)), np.arange(-2*w, 2*w, h), color = "r")
+
+plt.show()
