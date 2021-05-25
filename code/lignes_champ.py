@@ -83,3 +83,4 @@ plt.plot(sol[1], (np.zeros(len(sol[1])) - mg.a), color = "b")
 
 plt.show()
 '''
+
