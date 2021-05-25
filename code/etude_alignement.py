@@ -74,13 +74,13 @@ plt.show()
 
 
 #alpha réel
-'''
+
 alpha0 = [0, np.pi/6, np.pi/4, np.pi/3, np.pi/2]
 angle = []
 temps = 0
 
 for al0 in alpha0:
-    al, T = alpha_reel(r, z, moment_p, J, al0, 50, 10000)
+    al, T = alpha_reel(r, z, moment_p, J, al0, 20000000000000, 10000)
     angle.append(al)
     temps = T
 
@@ -95,4 +95,3 @@ plt.xlabel('temps (s)')
 plt.ylabel('alpha (rad)')
 plt.legend()
 plt.show()
-'''

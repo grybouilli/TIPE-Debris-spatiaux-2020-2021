@@ -73,8 +73,6 @@ def norme_B_arr(r, z):
 
 w = 11/10 * L
 
-fig, ax = plt.subplots()
-
 
 r, z = np.arange(-w, w, 0.2), np.arange(-w, w, 0.2)
 r, z = np.meshgrid(r, z)
@@ -87,14 +85,16 @@ for i in range(len(r)):
         V[i][j] = Bz(r[i][j], z[i][j])
 
 
+fig, ax = plt.subplots()
+
 ax.xaxis.set_ticks([])
 ax.yaxis.set_ticks([])
 
 mo = len(U)
 moo = len(V)
+
 print(mu0 * n * intensite)
 print("La norme au milieu du champ est",norme_B(0, 0),"normalement",  mu0 * n * intensite)
-
 
 ax.quiver(r, z, U, V, color = "grey")
 ax.set_title('Vecteur champ magnétique')

@@ -23,7 +23,7 @@ print("La norme au milieu du champ est",np.sqrt(U[mo//2][mo//2] **2 + V[moo//2][
 ax.quiver(r, z, U, V)
 '''
 #Carte des intensités
-ax.set_title('Vecteur champ magnétique')
+ax.set_title('Norme champ magnétique')
 
 #Vecteur champ magnétique 
 plt.pcolor(z, r, mg.normeB(abs(r), z), label = 'Norme du champ magnétique', cmap = 'coolwarm')
