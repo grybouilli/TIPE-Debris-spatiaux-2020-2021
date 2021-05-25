@@ -46,7 +46,6 @@ def int_Bz(theta, r, z):
     
     return (intp - intm)
 
-
 def Br(r, z):
     cste = -(a*mu0*n*intensite)/(2*np.pi)
     #print("La constante de Br est : ", cste)
@@ -61,6 +60,16 @@ def Bz(r, z):
 
 def norme_B(r, z):
     return np.sqrt((Br(r, z)**2) + (Bz(r, z)**2))
+
+'''
+def norme_B_arr(r, z):
+    n, m = len(r), len(r[0])
+    norme = np.zeros((n, m))
+    for i in range(n):
+        for j in range(m):
+            norme[i][j] = norme_B(r[i][j], z[i][j])
+    return norme
+'''
 
 w = 11/10 * L
 
@@ -89,5 +98,8 @@ print("La norme au milieu du champ est",norme_B(0, 0),"normalement",  mu0 * n * 
 
 ax.quiver(r, z, U, V, color = "grey")
 ax.set_title('Vecteur champ magnétique')
-
+'''
+plt.pcolor(z, r, norme_B_arr(abs(r), z), label = 'Norme du champ magnétique', cmap = 'coolwarm')
+plt.colorbar()
+'''
 plt.show()
