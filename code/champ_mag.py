@@ -99,8 +99,8 @@ print("La norme au milieu du champ est",norme_B(0, 0),"normalement",  mu0 * n * 
 ax.quiver(r, z, U, V, color = "grey")
 ax.set_title('Vecteur champ magnétique')
 '''
-plt.pcolor(z, r, norme_B_arr(abs(r), z), label = 'Norme du champ magnétique', cmap = 'coolwarm')
-plt.colorbar()
+#plt.pcolor(z, r, norme_B_arr(abs(r), z), label = 'Norme du champ magnétique', cmap = 'coolwarm')
+#plt.colorbar()
 '''
 plt.show()
 '''
