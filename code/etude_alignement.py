@@ -3,10 +3,12 @@ import aimantation as aim
 import matplotlib.pyplot as plt
 import numpy as np
 
-m = 10
-h = 5
-l = 5
-L = 5
+
+h = 0.05
+l = 0.05
+L = 0.05
+m = 2700 *h *l *L
+
 # prends les variables de l'espace temps, la norme du moment magnÃ©tique, le moment d'inertie et l'angle initial
 def angle_moment_petit(r,z,t,p,J_theta,alpha0):
     bz = mag.Bz(r,z)
@@ -43,11 +45,11 @@ def alpha_reel(r, z, p, J_theta, alpha0, tf, n):
 
 
 def alpha(r, z, p, J_theta, alpha0, t):
-    return alpha_reel(r, z, p, J_theta, alpha0, t, int(t*200))[0][-1]
+    return alpha_reel(r, z, p, J_theta, alpha0, t, int(t*2000))[0][-1]
 
 r = 10
 z = 1
-n_al = 0.181/(10**30)
+n_al = 0.181*(10**30)
 N = n_al * h * l * L
 moment_p = aim.norme_M_pop(r,z,N)
 J = m*(h**2+l**2+L**2) / 12
@@ -74,24 +76,25 @@ plt.show()
 
 
 #alpha réel
-
+'''
 alpha0 = [0, np.pi/6, np.pi/4, np.pi/3, np.pi/2]
 angle = []
 temps = 0
 
 for al0 in alpha0:
-    al, T = alpha_reel(r, z, moment_p, J, al0, 20000000000000, 10000)
+    al, T = alpha_reel(r, z, moment_p, J, al0, 9000, 10000)
     angle.append(al)
     temps = T
 
 plt.figure()
-plt.plot(temps, angle[0], label = 'alpha0 = 0')
-plt.plot(temps, angle[1], label = 'alpha0 = pi/6')
-plt.plot(temps, angle[2], label = 'alpha0 = pi/4')
-plt.plot(temps, angle[3], label = 'alpha0 = pi/3')
-plt.plot(temps, angle[4], label = 'alpha0 = pi/2')
+plt.plot(temps, angle[0], label = 'alpha0 = 0', linewidth = 2)
+plt.plot(temps, angle[1], label = 'alpha0 = pi/6', linewidth = 2)
+plt.plot(temps, angle[2], label = 'alpha0 = pi/4', linewidth = 2)
+plt.plot(temps, angle[3], label = 'alpha0 = pi/3',linewidth = 2)
+plt.plot(temps, angle[4], label = 'alpha0 = pi/2', linewidth = 2)
 
 plt.xlabel('temps (s)')
 plt.ylabel('alpha (rad)')
 plt.legend()
 plt.show()
+'''

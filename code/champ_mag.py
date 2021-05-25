@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 #Rayon du solénoïde (m):
 a = 1
 #Intensité du courant dans les filaments (A):
-intensite = 2500
+intensite = 10
 #Longueur du solénoïde (m):
 L = 3
 #Nombre de tour par mètre (tours.m*(-1)) (on peut avoir un diamètre de fil de 0.3mm):
@@ -64,7 +64,7 @@ def norme_B(r, z):
 
 w = 11/10 * L
 
-
+'''
 r, z = np.arange(-w, w, 0.2), np.arange(-w, w, 0.2)
 r, z = np.meshgrid(r, z)
 z += 0.5 #pour mieux centrer la figure
@@ -93,3 +93,4 @@ ax.quiver(r, z, U, V, color = "grey")
 ax.set_title('Vecteur champ magnétique')
 
 plt.show()
+'''

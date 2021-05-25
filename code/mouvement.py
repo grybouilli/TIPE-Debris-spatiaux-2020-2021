@@ -16,21 +16,27 @@ MASSE_AL = M_VOL_ALU * VOLUME
 J_INERTIE = MASSE_AL*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
 
 
-n_al = 0.181/(10**20) #(Ã©lectrons par m^3)
+n_al = 0.181*(10**30) #(Ã©lectrons par m^3)
 
 
 def force_mag(r,z,t,alpha0):
     N_e = n_al * HAUTEUR * LONGUEUR * LARGEUR
     norme_p = aim.norme_M_pop(r,z,N_e)
     
-    def angle_moment(rr,zz):
-        return ali.alpha(rr,zz,norme_p,J_INERTIE,alpha0,t)   
+    '''
+    def angle_moment(rr, zz):
+        return ali.alpha_reel(rr, zz, norme_p, J_INERTIE, alpha0, t, n)[0][-1]
         
-    p_r = lambda rr,zz: np.sin(angle_moment(rr,zz)) * aim.norme_M_pop(rr,zz,N_e)
-    p_z = lambda rr,zz: np.cos(angle_moment(rr,zz)) * aim.norme_M_pop(rr,zz,N_e)  
+    p_r = lambda rr,zz: np.sin(angle_moment(r, z)) * aim.norme_M_pop(rr,zz,N_e)
+    p_z = lambda rr,zz: np.cos(angle_moment(r, z)) * aim.norme_M_pop(rr,zz,N_e)  
+    '''
+    
+    p_r = lambda rr,zz: np.sin(alpha0) * aim.norme_M_pop(rr,zz,N_e)
+    p_z = lambda rr,zz: np.cos(alpha0) * aim.norme_M_pop(rr,zz,N_e)  
     
     pp_r = p_r(r,z)
-    pp_z = p_z(r,z)  
+    pp_z = p_z(r,z)
+
     dp_r_dr , dp_r_dz = op.derive_r(p_r,10**-6)(r,z), op.derive_z(p_r,10**-6)(r,z) 
     dp_z_dr , dp_z_dz = op.derive_r(p_z,10**-6)(r,z), op.derive_z(p_z,10**-6)(r,z)  
 
@@ -64,8 +70,10 @@ def pos_verlet(m, alpha0, p0, tf, n):
     
     for k in range (1, n) :
         a_r_n, a_z_n = ac(m, P[0][k-1], P[1][k-1], T[k-1], alpha0)
+        
         P[0][k] = P[0][k-1] + h*V[0][k-1] + ((h**2)/2)*a_r_n
         P[1][k] = P[1][k-1] + h*V[1][k-1] + ((h**2)/2)*a_z_n
+        
         T[k] = T[k-1] + h
         
         a_r_n1, a_z_n1 = ac(m, P[0][k], P[1][k], T[k], alpha0)
@@ -90,7 +98,7 @@ def pos_euler(m, alpha0, p0, tf, n):
     return (P[0], P[1])
 
 '''
-w = 11/10 * mg.L
+w = 11/10 * mag.L
 
 t0 = 0
 alpha0 = 0
@@ -111,8 +119,17 @@ axb.yaxis.set_ticks([])
 axb.quiver(r, z, U, V, alpha=0.5,color='grey')
 '''
 
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.set_aspect('equal')
 
-pos_r, pos_z = pos_euler(0.1, 0, (0.5, 2), 100000, 1000)
+pos_r, pos_z = pos_verlet(0.1, 0.1, (1.5, 0), 180, 200)
+sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
 
-plt.plot(pos_r, pos_z, color = 'r')
+plt.plot((np.zeros(len(sol[1])) + mag.a), sol[1], color = "b")
+plt.plot((np.zeros(len(sol[1])) - mag.a), sol[1], color = "b")
+plt.plot(sol[0], (np.zeros(len(sol[0])) + mag.L/2), color = "b")
+plt.plot(sol[0], (np.zeros(len(sol[0])) - mag.L/2), color = "b")
+
+plt.plot(pos_r, pos_z, color = 'r', linewidth = 2)
 plt.show()

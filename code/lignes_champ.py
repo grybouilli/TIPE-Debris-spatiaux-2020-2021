@@ -37,7 +37,7 @@ def ligne_champ(r0, z0, h):
     Z1 = np.array(Z)
     return R1, Z1
 
-
+'''
 r, z = mg.r, mg.z
 
 R1, Z1 = ligne_champ(0.9, 0, h)
@@ -82,4 +82,4 @@ plt.plot(sol[1], (np.zeros(len(sol[1])) + mg.a), color = "b")
 plt.plot(sol[1], (np.zeros(len(sol[1])) - mg.a), color = "b")
 
 plt.show()
->>>>>>> e833749c0e93b35a1cf0ec4ade437ae896a642eb
+'''
