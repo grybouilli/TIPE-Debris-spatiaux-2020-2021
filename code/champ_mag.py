@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 #Rayon du solénoïde (m):
 a = 1
 #Intensité du courant dans les filaments (A):
-i = 1000000
+I = 2500
 #Longueur du solénoïde (m):
 L = 3
 #Nombre de tour par mètre (tours.m*(-1)) (on peut avoir un diamètre de fil de 0.3mm):
@@ -48,12 +48,12 @@ def int_Bz(theta, r, z):
 
 
 def Br(r, z):
-    cste = -(a*mu0*n*i)/(2*np.pi)
+    cste = -(a*mu0*n*I)/(2*np.pi)
     inte = lambda theta : int_Br(theta, r, z)
     return cste*sc.quad(inte, 0, np.pi)[0]
 
 def Bz(r, z):
-    cste = (a*mu0*n*i)/(2*np.pi)
+    cste = (a*mu0*n*I)/(2*np.pi)
     inte = lambda theta : int_Bz(theta, r, z)
     return cste*sc.quad(inte, 0, np.pi)[0]
 
@@ -61,8 +61,6 @@ def norme_B(r, z):
     return np.sqrt((Br(r, z)**2) + (Bz(r, z)**2))
 
 w = 11/10 * L
-
-fig, ax = plt.subplots()
 
 
 r, z = np.arange(-w, w, 0.2), np.arange(-w, w, 0.2)
@@ -75,18 +73,16 @@ for i in range(len(r)):
         U[i][j] = Br(r[i][j], z[i][j])
         V[i][j] = Bz(r[i][j], z[i][j])
 
-'''
+fig, ax = plt.subplots()
 ax.xaxis.set_ticks([])
 ax.yaxis.set_ticks([])
 
 mo = len(U)
 moo = len(V)
-print("La norme au milieu du champ est",norme_B(0, 0),"normalement",  mu0 * n * i)
+print("La norme au milieu du champ est",norme_B(0, 0),"normalement",  mu0 * n * I)
 
 
 ax.quiver(r, z, U, V, color = "grey")
 ax.set_title('Vecteur champ magnétique')
 
 plt.show()
-    
-''' 
