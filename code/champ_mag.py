@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 #Rayon du solénoïde (m):
 a = 1
 #Intensité du courant dans les filaments (A):
-I = 2500
+intensite = 2500
 #Longueur du solénoïde (m):
 L = 3
 #Nombre de tour par mètre (tours.m*(-1)) (on peut avoir un diamètre de fil de 0.3mm):
@@ -48,12 +48,14 @@ def int_Bz(theta, r, z):
 
 
 def Br(r, z):
-    cste = -(a*mu0*n*I)/(2*np.pi)
+    cste = -(a*mu0*n*intensite)/(2*np.pi)
+    #print("La constante de Br est : ", cste)
     inte = lambda theta : int_Br(theta, r, z)
     return cste*sc.quad(inte, 0, np.pi)[0]
 
 def Bz(r, z):
-    cste = (a*mu0*n*I)/(2*np.pi)
+    cste = (a*mu0*n*intensite)/(2*np.pi)
+    #print("La constante de Bz est : ", cste)
     inte = lambda theta : int_Bz(theta, r, z)
     return cste*sc.quad(inte, 0, np.pi)[0]
 
@@ -73,13 +75,18 @@ for i in range(len(r)):
         U[i][j] = Br(r[i][j], z[i][j])
         V[i][j] = Bz(r[i][j], z[i][j])
 
+
 fig, ax = plt.subplots()
+
 ax.xaxis.set_ticks([])
 ax.yaxis.set_ticks([])
 
 mo = len(U)
 moo = len(V)
-print("La norme au milieu du champ est",norme_B(0, 0),"normalement",  mu0 * n * I)
+
+print(mu0 * n * intensite)
+print("La norme au milieu du champ est",norme_B(0, 0),"normalement",  mu0 * n * intensite)
+
 
 
 ax.quiver(r, z, U, V, color = "grey")

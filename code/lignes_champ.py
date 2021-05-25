@@ -80,3 +80,6 @@ plt.plot((np.zeros(len(sol[0])) + mg.L/2), sol[0], color = "b")
 plt.plot((np.zeros(len(sol[0])) - mg.L/2), sol[0], color = "b")
 plt.plot(sol[1], (np.zeros(len(sol[1])) + mg.a), color = "b")
 plt.plot(sol[1], (np.zeros(len(sol[1])) - mg.a), color = "b")
+
+plt.show()
+>>>>>>> e833749c0e93b35a1cf0ec4ade437ae896a642eb
