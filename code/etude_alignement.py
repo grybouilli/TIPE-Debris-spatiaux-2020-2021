@@ -76,7 +76,7 @@ plt.show()
 
 
 #alpha réel
-'''
+
 alpha0 = [0, np.pi/6, np.pi/4, np.pi/3, np.pi/2]
 angle = []
 temps = 0
@@ -93,8 +93,10 @@ plt.plot(temps, angle[2], label = 'alpha0 = pi/4', linewidth = 2)
 plt.plot(temps, angle[3], label = 'alpha0 = pi/3',linewidth = 2)
 plt.plot(temps, angle[4], label = 'alpha0 = pi/2', linewidth = 2)
 
-plt.xlabel('temps (s)')
-plt.ylabel('alpha (rad)')
-plt.legend()
+plt.xlabel('temps (s)',fontsize='40')
+plt.ylabel('alpha (rad)',fontsize='40')
+plt.xticks(fontsize='40')
+plt.yticks(fontsize='40')
+plt.legend(fontsize='40')
 plt.show()
-'''
+''''''

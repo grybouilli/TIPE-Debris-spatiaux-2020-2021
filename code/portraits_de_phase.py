@@ -83,7 +83,7 @@ temps_verlet = 240
 
 #plusieurs positions de départ:
 
-RD,ZD= np.arange(0,2.,0.5) , np.array([2.5,2.5,3,3])
+RD,ZD= np.array([0.5,1.5]) , np.array([2.5,3])
 colors = ['r','g','b','y']
 nportrait = len(RD)
 pos_r_m,pos_z_m,vit_r_m,vit_z_m = np.zeros((nportrait,nverlet)),np.zeros((nportrait,nverlet)),np.zeros((nportrait,nverlet)),np.zeros((nportrait,nverlet))
@@ -98,4 +98,12 @@ for i in range (nportrait):
     add_arrow(portrait_r,size=30)
     add_arrow(portrait_z, size=30)
 
+axr.set_xlabel('r (m)',fontsize='40')
+axr.set_ylabel('vitesse radiale (m.s^-1)',fontsize='40')
+
+axz.set_xlabel('z (m)',fontsize='40')
+axz.set_ylabel('vitesse selon z (m.s^-1)',fontsize='40')
+
+plt.xticks(fontsize='40')
+plt.yticks(fontsize='40')
 plt.show()
