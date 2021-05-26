@@ -16,7 +16,7 @@ MASSE_AL = M_VOL_ALU * VOLUME
 J_INERTIE = MASSE_AL*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
 
 
-n_al = 0.181*(10**30) #(Ã©lectrons par m^3)
+n_al = 0.181*(10**30) #(electrons par m^3)
 
 
 def force_mag(r,z,t,alpha0):

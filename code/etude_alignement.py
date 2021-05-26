@@ -26,7 +26,7 @@ def alpha_reel(r, z, p, J_theta, alpha0, tf, n):
     br = mag.Br(r, z)
     cste = p/J_theta
     
-    h = tf/n #le pas d'intégration
+    h = tf/n #le pas d'intÃ©gration
     Y = np.zeros(n)
     A = np.zeros(n)
     A[0] = alpha0
@@ -54,7 +54,7 @@ N = n_al * h * l * L
 moment_p = aim.norme_M_pop(r,z,N)
 J = m*(h**2+l**2+L**2) / 12
 
-#alpha approché aux petits angles
+#alpha approchÃ© aux petits angles
 '''
 t = np.linspace(0,50, 10000)
 alpha_0 = [np.pi/3, np.pi/4, np.pi/6]
@@ -75,7 +75,7 @@ plt.show()
 '''
 
 
-#alpha réel
+#alpha rÃ©el
 '''
 alpha0 = [0, np.pi/6, np.pi/4, np.pi/3, np.pi/2]
 angle = []
