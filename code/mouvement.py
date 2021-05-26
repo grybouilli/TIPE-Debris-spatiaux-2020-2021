@@ -119,21 +119,21 @@ axb.yaxis.set_ticks([])
 axb.quiver(r, z, U, V, alpha=0.5,color='grey')
 '''
 
-fig = plt.figure()
-ax = fig.add_subplot(111)
-ax.set_aspect('equal')
+# fig = plt.figure()
+# ax = fig.add_subplot(111)
+# ax.set_aspect('equal')
 
 #Coords de depart :
-xd, yd = 1.5, 3
+# xd, yd = 1.5, 3
 
-pos_r, pos_z = pos_verlet(0.1, 0.1, (xd, yd), 240, 200)
-sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
+# pos_r, pos_z = pos_verlet(0.1, 0.1, (xd, yd), 240, 200)
+# sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
 
-plt.plot(xd, yd, color = 'red', marker = '+', markersize = 12)
-plt.plot((np.zeros(len(sol[1])) + mag.a), sol[1], color = "b")
-plt.plot((np.zeros(len(sol[1])) - mag.a), sol[1], color = "b")
-plt.plot(sol[0], (np.zeros(len(sol[0])) + mag.L/2), color = "b")
-plt.plot(sol[0], (np.zeros(len(sol[0])) - mag.L/2), color = "b")
+# plt.plot(xd, yd, color = 'red', marker = '+', markersize = 12)
+# plt.plot((np.zeros(len(sol[1])) + mag.a), sol[1], color = "b")
+# plt.plot((np.zeros(len(sol[1])) - mag.a), sol[1], color = "b")
+# plt.plot(sol[0], (np.zeros(len(sol[0])) + mag.L/2), color = "b")
+# plt.plot(sol[0], (np.zeros(len(sol[0])) - mag.L/2), color = "b")
 
-plt.plot(pos_r, pos_z, color = 'r', linewidth = 2)
-plt.show()
+# plt.plot(pos_r, pos_z, color = 'r', linewidth = 2)
+# plt.show()
