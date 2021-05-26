@@ -64,24 +64,38 @@ figz = plt.figure()
 axr = figr.gca()
 axz = figz.gca()
 
-#Coords de depart :
-rd, zd = 1.5,3
+# #Coords de depart :
+# rd, zd = 1.5,3
 nverlet = 500
 temps_verlet = 240
-pos_r, pos_z, vit_r, vit_z = np.zeros(nverlet),np.zeros(nverlet),np.zeros(nverlet),np.zeros(nverlet)
+# pos_r, pos_z, vit_r, vit_z = np.zeros(nverlet),np.zeros(nverlet),np.zeros(nverlet),np.zeros(nverlet)
 
-pos_r, pos_z, vit_r, vit_z = pos_vit_verlet(0.1, 0.1, (rd, zd), temps_verlet, nverlet) 
-axr.plot(pos_r[0], vit_r[0], color = 'red', marker = '+', markersize = 12)
-axz.plot(pos_z[0], vit_z[0], color = 'red', marker = '+', markersize = 12)
+# pos_r, pos_z, vit_r, vit_z = pos_vit_verlet(0.1, 0.1, (rd, zd), temps_verlet, nverlet) 
+# axr.plot(pos_r[0], vit_r[0], color = 'red', marker = '+', markersize = 12)
+# axz.plot(pos_z[0], vit_z[0], color = 'red', marker = '+', markersize = 12)
 
-portrait_r = axr.plot(pos_r, vit_r,color='r')[0]
-portrait_z = axz.plot(pos_z, vit_z,color='r')[0]
+# portrait_r = axr.plot(pos_r, vit_r,color='r')[0]
+# portrait_z = axz.plot(pos_z, vit_z,color='r')[0]
 
-add_arrow(portrait_r,size=30)
-add_arrow(portrait_z, size=30)
+# add_arrow(portrait_r,size=30)
+# add_arrow(portrait_z, size=30)
 
-# test = np.linspace(0,3,100)
-# testy = test * 10**-3
 
-#axz.plot(test,testy)
+#plusieurs positions de départ:
+
+RD,ZD= np.arange(0,2.,0.5) , np.array([2.5,2.5,3,3])
+colors = ['r','g','b','y']
+nportrait = len(RD)
+pos_r_m,pos_z_m,vit_r_m,vit_z_m = np.zeros((nportrait,nverlet)),np.zeros((nportrait,nverlet)),np.zeros((nportrait,nverlet)),np.zeros((nportrait,nverlet))
+for i in range (nportrait):
+    pos_r_m[i],pos_z_m[i],vit_r_m[i],vit_z_m[i] = pos_vit_verlet(0.1,0.1,(RD[i],ZD[i]),temps_verlet,nverlet)
+    axr.plot(pos_r_m[i][0], vit_r_m[i][0], color = colors[i], marker = '+', markersize = 12)
+    axz.plot(pos_z_m[i][0], vit_z_m[i][0], color = colors[i], marker = '+', markersize = 12)
+
+    portrait_r = axr.plot(pos_r_m[i], vit_r_m[i],color=colors[i])[0]
+    portrait_z = axz.plot(pos_z_m[i], vit_z_m[i],color=colors[i])[0]
+
+    add_arrow(portrait_r,size=30)
+    add_arrow(portrait_z, size=30)
+
 plt.show()
