@@ -65,6 +65,15 @@ t_app = cherche_pulsation()/10
 def compris(x, lim1, lim2):
     return x >= lim1 and x <= lim2
 
+def choc(r, z):
+    A = mag.a
+    L1 = mag.L
+    #On considère un choc si le centre de masse du débris est a h/2 d'un bord du solénoide
+    if (z > (L1/2 + 0.025)) or (z < (-L1/2 - 0.025)):
+        return False
+    if (np.abs(r - A) < 0.025) or (np.abs(r + A) < 0.025):
+        return True
+
 def trouve_capture(m, alpha0, p0, tf, n):
     rg, rb = -1, 1   #limites en r de la moitie basse du solenoide
     zb, zh = -1.5, 0 #limites en z de la moitie basse du solenoide
@@ -80,31 +89,47 @@ def trouve_capture(m, alpha0, p0, tf, n):
         P[0][k] = P[0][k-1] + h*V[0][k-1] #je sais pas si c'est k ou k-1 dans le Y, à vérifier
         P[1][k] = P[1][k-1] + h*V[1][k-1]
         if compris(P[0][k], rg, rb) and compris(P[1][k], zb, zh):
-            return True
+            return 1
+        if choc(P[0][k], P[1][k]):
+            return 2
         T[k] = k*h
-    return False
+    return 0
 
-r1, z1 = np.arange(-1.5, 1.6, 1), np.arange(1.5, 4.6, 1)
+#Création de la grille de tests : on teste que pour la moitié droite, et on copie à gauche ( symetrie du champ )
+r1, z1 = np.arange(0, 2.1, 1), np.arange(1.5, 5.6, 1)
 r1, z1 = np.meshgrid(r1, z1)
 
 def liste_points_cap():
     r_cap = []
     z_cap = []
+    r_choc = []
+    z_choc = []
     r_nope = []
     z_nope = []
 
     for i in range(len(r1)):
         for j in range(len(r1[0])):
-            if trouve_capture(0.1, 0.1, (r1[i][j], z1[i][j]), t_app, 50):
+            a = trouve_capture(0.1, 0.1, (r1[i][j], z1[i][j]), t_app, int(int(t_app) * 1.5)) 
+            if a == 1:
                 r_cap.append(r1[i][j])
                 z_cap.append(z1[i][j])
-            else:
+            if a == 2:
+                r_choc.append(r1[i][j])
+                z_choc.append(z1[i][j])
+            if a == 0:
                 r_nope.append(r1[i][j])
                 z_nope.append(z1[i][j])
 
-    return r_cap, z_cap, r_nope, z_nope
+    return r_cap, z_cap, r_choc, z_choc, r_nope, z_nope
 
-print(r1, z1)
+def replicate(list_r, list_z):
+    for i in range(len(list_r)):
+        list_r.append(-list_r[i])
+        list_z.append(list_z[i])
+    return list_r, list_z
+
+
+#print(r1, '\n', z1)
 
 plt.figure()
 
@@ -112,10 +137,34 @@ plt.vlines(x = [-1, 1], ymin = [-1.5, -1.5], ymax = [1.5, 1.5], colors = 'teal')
 plt.hlines(y = 1.5, xmin = -1, xmax = 1, colors = 'teal')
 plt.hlines(y = -1.5, xmin = -1, xmax = 1, colors = 'teal')
 
-r_cap, z_cap, r_nope, z_nope = liste_points_cap()
-for i in range(len(r_cap)):
-    plt.plot(r_cap[i], z_cap[i], color = 'red', marker = '+', markersize = 12)
-for i in range(len(r_nope)):
-    plt.plot(r_nope[i], z_nope[i], color = 'blue', marker = '+', markersize = 12)
+r_cap, z_cap, r_choc, z_choc, r_nope, z_nope = liste_points_cap()
+r_cap1, z_cap1 = replicate(r_cap, z_cap)
+r_choc1, z_choc1 = replicate(r_choc, z_choc)
+r_nope1, z_nope1 = replicate(r_nope, z_nope)
 
+for i in range(len(r_cap1)):
+    if i == 0:
+        plt.plot(r_cap1[0], z_cap1[0], color = 'red', label = 'Capturés', marker = '+', markersize = 12)
+    else:
+        plt.plot(r_cap1[i], z_cap1[i], color = 'red', marker = '+', markersize = 12)
+for i in range(len(r_choc1)):
+    if i == 0:
+        plt.plot(r_choc1[0], z_choc1[0], color = 'green', label = 'Chocs', marker = '+', markersize = 12)
+    else:
+        plt.plot(r_choc1[i], z_choc1[i], color = 'green', marker = '+', markersize = 12)
+for i in range(len(r_nope1)):
+    if i == 0:
+        plt.plot(r_nope1[0], z_nope1[0], color = 'blue', label = 'Non capturés', marker = '+', markersize = 12)
+    else:
+        plt.plot(r_nope1[i], z_nope1[i], color = 'blue', marker = '+', markersize = 12)
+
+plt.title(label = 'Portée effective du dispositif', fontsize = '20' )
+plt.xlabel('r (m)', fontsize = '20')
+plt.ylabel('z (m)', fontsize = '20')
+
+plt.xlim([-9, 9])
+plt.ylim([-2, 10])
+plt.xticks(fontsize='20')
+plt.yticks(fontsize='20')
+plt.legend()
 plt.show()
