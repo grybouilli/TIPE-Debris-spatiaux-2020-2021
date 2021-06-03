@@ -7,17 +7,17 @@ import aimantation as aim
 import champ_mag as mag
 import mouvement as mv
 
-h = 0.05
-l = 0.05
-L = 0.05
-m = 2700 *h *l *L
+hauteur = 0.05
+largeur = 0.05
+Longueur = 0.05
+m = 2700 *hauteur *largeur *Longueur
 
 r = 10
 z = 1
 n_al = 0.181*(10**30)
-N = n_al * h * l * L
+N = n_al * hauteur * largeur * Longueur
 moment_p = aim.norme_M_pop(r,z,N)
-J = m*(h**2+l**2+L**2) / 12
+J = m*(hauteur**2+largeur**2+Longueur**2) / 12
 
 def cherche_liste(L, x, epsilon):
     index = 0
@@ -61,7 +61,7 @@ def cherche_pulsation():
 #Le temps de l'étude, dans lequel on considère l'angle constant
 t_app = cherche_pulsation()/10
 
-
+print(t_app)
 def compris(x, lim1, lim2):
     return x >= lim1 and x <= lim2
 
@@ -69,18 +69,23 @@ def choc(r, z):
     A = mag.a
     L1 = mag.L
     #On considère un choc si le centre de masse du débris est a h/2 d'un bord du solénoide
-    if (z > (L1/2 + 0.025)) or (z < (-L1/2 - 0.025)):
-        return False
-    if (np.abs(r - A) < 0.025) or (np.abs(r + A) < 0.025):
+    if (compris(r, -A - hauteur/2, -A + hauteur/2) or compris(r, A - hauteur/2, A + hauteur/2)) and compris(z, -L1/2 - hauteur/2, L1/2 + hauteur/2):
         return True
+    if compris(r, -A - hauteur/2, A + hauteur/2) and compris(z, -L1/2 - hauteur/2, -L1/2 + hauteur/2):
+        return True
+    return False
 
 def trouve_capture(m, alpha0, p0, tf, n):
-    rg, rb = -1, 1   #limites en r de la moitie basse du solenoide
-    zb, zh = -1.5, 0 #limites en z de la moitie basse du solenoide
+    rg, rb = -mag.a, mag.a   #limites en r de la moitie basse du solenoide
+    zb, zh = -mag.L/2, 0     #limites en z de la moitie basse du solenoide
     h = tf/n #pas
     V = np.zeros((2, n)) #vitesse initiale
     P = np.zeros((2, n))
     P[0][0], P[1][0] = p0
+    if choc(P[0][0], P[1][0]):
+        return 2
+    if compris(P[0][0], rg, rb) and compris(P[1][0], zb, zh):
+        return 1
     T = np.zeros(n)
     for k in range (1, n):
         a_r , a_z = mv.ac(m, P[0][k-1], P[1][k-1], T[k-1], alpha0)
@@ -88,15 +93,15 @@ def trouve_capture(m, alpha0, p0, tf, n):
         V[1][k] = V[1][k-1] + h*a_z
         P[0][k] = P[0][k-1] + h*V[0][k-1] #je sais pas si c'est k ou k-1 dans le Y, à vérifier
         P[1][k] = P[1][k-1] + h*V[1][k-1]
-        if compris(P[0][k], rg, rb) and compris(P[1][k], zb, zh):
-            return 1
         if choc(P[0][k], P[1][k]):
             return 2
+        if compris(P[0][k], rg, rb) and compris(P[1][k], zb, zh):
+            return 1
         T[k] = k*h
     return 0
 
 #Création de la grille de tests : on teste que pour la moitié droite, et on copie à gauche ( symetrie du champ )
-r1, z1 = np.arange(0, 2.1, 1), np.arange(1.5, 5.6, 1)
+r1, z1 = np.arange(0, 6.1, 1), np.arange(-6, 6.1, 1)
 r1, z1 = np.meshgrid(r1, z1)
 
 def liste_points_cap():
@@ -109,7 +114,7 @@ def liste_points_cap():
 
     for i in range(len(r1)):
         for j in range(len(r1[0])):
-            a = trouve_capture(0.1, 0.1, (r1[i][j], z1[i][j]), t_app, int(int(t_app) * 1.5)) 
+            a = trouve_capture(0.1, np.pi/3, (r1[i][j], z1[i][j]), t_app, int(int(t_app) * 1.5)) 
             if a == 1:
                 r_cap.append(r1[i][j])
                 z_cap.append(z1[i][j])
@@ -123,24 +128,31 @@ def liste_points_cap():
     return r_cap, z_cap, r_choc, z_choc, r_nope, z_nope
 
 def replicate(list_r, list_z):
-    for i in range(len(list_r)):
+    for i in range(1, len(list_r)):
         list_r.append(-list_r[i])
         list_z.append(list_z[i])
     return list_r, list_z
 
-
 #print(r1, '\n', z1)
-
-plt.figure()
-
-plt.vlines(x = [-1, 1], ymin = [-1.5, -1.5], ymax = [1.5, 1.5], colors = 'teal')
-plt.hlines(y = 1.5, xmin = -1, xmax = 1, colors = 'teal')
-plt.hlines(y = -1.5, xmin = -1, xmax = 1, colors = 'teal')
 
 r_cap, z_cap, r_choc, z_choc, r_nope, z_nope = liste_points_cap()
 r_cap1, z_cap1 = replicate(r_cap, z_cap)
 r_choc1, z_choc1 = replicate(r_choc, z_choc)
 r_nope1, z_nope1 = replicate(r_nope, z_nope)
+
+N_points = 2 * len(r1) * len(r1[0]) - len(r1)
+
+print("La proba que le débris soit capturé est de :", len(r_cap1)/N_points)
+print("La proba que le débris entre en collision avec les parois est de :", len(r_choc1)/N_points)
+print('La proba que le débris ne soit pas capturé est de :', len(r_nope1)/N_points)
+
+plt.figure()
+
+#Crée la forme du solenoide
+plt.vlines(x = [-1, 1], ymin = [-1.5, -1.5], ymax = [1.5, 1.5], colors = 'teal')
+plt.hlines(y = 1.5, xmin = -1, xmax = 1, colors = 'teal')
+plt.hlines(y = -1.5, xmin = -1, xmax = 1, colors = 'teal')
+
 
 for i in range(len(r_cap1)):
     if i == 0:
@@ -162,8 +174,8 @@ plt.title(label = 'Portée effective du dispositif', fontsize = '20' )
 plt.xlabel('r (m)', fontsize = '20')
 plt.ylabel('z (m)', fontsize = '20')
 
-plt.xlim([-9, 9])
-plt.ylim([-2, 10])
+plt.xlim([-11, 11])
+plt.ylim([-7, 7])
 plt.xticks(fontsize='20')
 plt.yticks(fontsize='20')
 plt.legend()
