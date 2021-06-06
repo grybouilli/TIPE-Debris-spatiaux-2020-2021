@@ -18,6 +18,11 @@ J_INERTIE = MASSE_AL*(HAUTEUR**2+LONGUEUR**2+LARGEUR**2) / 12
 
 n_al = 0.181*(10**30) #(electrons par m^3)
 
+def signe_de(x):
+    if  x < 0:
+        return -1
+    else:
+        return 1
 
 def force_mag(r,z,t,alpha0):
     N_e = n_al * HAUTEUR * LONGUEUR * LARGEUR
@@ -82,6 +87,50 @@ def pos_verlet(m, alpha0, p0, tf, n):
         
     return (P[0], P[1])
 
+
+def pos_verlet_avec_collision(m, alpha0, p0, tf, n,a_range=[-mag.a,mag.a],L_range=[-mag.L/2,mag.L/2], r_lim=5, z_lim=5):
+    h = tf/n
+    V = np.zeros((n, n))
+    P = np.zeros((n, n))
+    P[0][0], P[1][0] = p0
+    T = np.zeros(n)
+    collision = False
+    for k in range (1, n) :
+        a_r_n, a_z_n = ac(m, P[0][k-1], P[1][k-1], T[k-1], alpha0)
+        
+        P[0][k] = P[0][k-1] + h*V[0][k-1] + ((h**2)/2)*a_r_n
+        P[1][k] = P[1][k-1] + h*V[1][k-1] + ((h**2)/2)*a_z_n
+        
+        T[k] = T[k-1] + h
+        
+        a_r_n1, a_z_n1 = ac(m, P[0][k], P[1][k], T[k], alpha0)
+        if collision:
+            V[0][k] = -(V[0][k-1] + (h/2)*(a_r_n + a_r_n1))
+            collision = False
+        else:
+            V[0][k] = V[0][k-1] + (h/2)*(a_r_n + a_r_n1)
+
+        V[1][k] = V[1][k-1] + (h/2)*(a_z_n + a_z_n1)
+        if P[0][k] < a_range[0] or P[0][k] > a_range[1]:
+            if L_range[1] >= P[1][k] >= L_range[0]:
+                print("collision détectée à z =", P[1][k])
+
+                #---------- correction de l'effet fantôme ----------
+                print("r_av, z_av = ", P[0][k],P[1][k])
+                s = signe_de(P[0][k])
+                rp = - (s * a_range[0] + s * 10**-2)
+                dr = P[0][k] - P[0][k-1]
+                drp = rp - P[0][k-1]
+                dz = -(P[1][k] - P[1][k-1])
+                P[0][k],P[1][k] = rp , -((drp * dz / dr)  - P[1][k-1])
+
+                print("r_ap, z_ap = ", P[0][k],P[1][k])
+                # ---------------------------------------------------
+                collision =True
+        if P[0][k] > r_lim or P[0][k] < -r_lim or P[1][k] > z_lim or P[1][k] < -z_lim:
+            break
+    return (P[0], P[1])
+
 def pos_euler(m, alpha0, p0, tf, n):
     h = tf/n #pas
     V = np.zeros((2, n)) #vitesse initiale
@@ -96,6 +145,7 @@ def pos_euler(m, alpha0, p0, tf, n):
         P[1][k] = P[1][k-1] + h*V[1][k-1]
         T[k] = k*h
     return (P[0], P[1])
+
 
 '''
 w = 11/10 * mag.L
@@ -124,9 +174,11 @@ ax = fig.add_subplot(111)
 ax.set_aspect('equal')
 
 #Coords de depart :
-xd, yd = 1.5, 3
+xd, yd = 0.5 , 3
 
-pos_r, pos_z = pos_verlet(0.1, 0.1, (xd, yd), 240, 200)
+alpha_init = mag.Br(xd,yd)/mag.Bz(xd,yd)
+print(alpha_init)
+pos_r, pos_z = pos_verlet_avec_collision(0.1, alpha_init, (xd, yd), 300, 700)
 sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
 
 plt.plot(xd, yd, color = 'red', marker = '+', markersize = 12)
