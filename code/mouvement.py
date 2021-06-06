@@ -122,7 +122,7 @@ def verlet_avec_collision(m, alpha0, p0, tf, n,a_range=[-mag.a,mag.a],L_range=[-
                 dr = P[0][k] - P[0][k-1]
                 drp = rp - P[0][k-1]
                 dz = -(P[1][k] - P[1][k-1])
-                P[0][k],P[1][k] = rp , -((drp * dz / dr)  - P[1][k-1])
+                P[0][k],P[1][k] = rp , -((drp * dz / dr)  - P[1][k-1]) #on corrige le point hors du solénoïde qui a causé la détection de la collision
 
                 print("r_ap, z_ap = ", P[0][k],P[1][k])
                 # ---------------------------------------------------
