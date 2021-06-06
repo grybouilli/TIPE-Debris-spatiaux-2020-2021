@@ -169,3 +169,22 @@ axb.yaxis.set_ticks([])
 axb.quiver(r, z, U, V, alpha=0.5,color='grey')
 '''
 
+def tracer_trajectoire(r_init,z_init, tf, n, sol_a=mag.a,sol_L=mag.L,graphe =plt.plot()[0]):
+    alpha_init = mag.Br(r_init,z_init)/mag.Bz(r_init,z_init)
+    pos_r, pos_z, vit_r, vit_z = verlet_avec_collision(0.1, alpha_init, (r_init, z_init), tf, n)
+    sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
+
+    plt.plot(r_init, z_init, color = 'red', marker = '+', markersize = 12)
+    plt.plot((np.zeros(len(sol[1])) + mag.a), sol[1], color = "b")
+    plt.plot((np.zeros(len(sol[1])) - mag.a), sol[1], color = "b")
+    plt.plot(sol[0], (np.zeros(len(sol[0])) + mag.L/2), color = "b")
+    plt.plot(sol[0], (np.zeros(len(sol[0])) - mag.L/2), color = "b")
+
+    trajectoire = plt.plot(pos_r, pos_z, color = 'r', linewidth = 2)[0]
+
+    plt.xlabel('r (m)',fontsize='40')
+    plt.ylabel('z (m)',fontsize='40')
+    plt.xticks(fontsize='40')
+    plt.yticks(fontsize='40')
+
+    op.add_arrow(trajectoire,size=50)
