@@ -88,7 +88,7 @@ def pos_verlet(m, alpha0, p0, tf, n):
     return (P[0], P[1])
 
 
-def pos_verlet_avec_collision(m, alpha0, p0, tf, n,a_range=[-mag.a,mag.a],L_range=[-mag.L/2,mag.L/2], r_lim=5, z_lim=5):
+def verlet_avec_collision(m, alpha0, p0, tf, n,a_range=[-mag.a,mag.a],L_range=[-mag.L/2,mag.L/2], r_lim=5, z_lim=5):
     h = tf/n
     V = np.zeros((n, n))
     P = np.zeros((n, n))
@@ -129,7 +129,7 @@ def pos_verlet_avec_collision(m, alpha0, p0, tf, n,a_range=[-mag.a,mag.a],L_rang
                 collision =True
         if P[0][k] > r_lim or P[0][k] < -r_lim or P[1][k] > z_lim or P[1][k] < -z_lim:
             break
-    return (P[0], P[1])
+    return (P[0], P[1],V[0],V[1])
 
 def pos_euler(m, alpha0, p0, tf, n):
     h = tf/n #pas
@@ -174,11 +174,11 @@ ax = fig.add_subplot(111)
 ax.set_aspect('equal')
 
 #Coords de depart :
-xd, yd = 0.5 , 3
+xd, yd = 1.5 , 3
 
 alpha_init = mag.Br(xd,yd)/mag.Bz(xd,yd)
 print(alpha_init)
-pos_r, pos_z = pos_verlet_avec_collision(0.1, alpha_init, (xd, yd), 300, 700)
+pos_r, pos_z, vit_r, vit_z = verlet_avec_collision(0.1, alpha_init, (xd, yd), 200, 600)
 sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
 
 plt.plot(xd, yd, color = 'red', marker = '+', markersize = 12)
@@ -187,11 +187,12 @@ plt.plot((np.zeros(len(sol[1])) - mag.a), sol[1], color = "b")
 plt.plot(sol[0], (np.zeros(len(sol[0])) + mag.L/2), color = "b")
 plt.plot(sol[0], (np.zeros(len(sol[0])) - mag.L/2), color = "b")
 
-plt.plot(pos_r, pos_z, color = 'r', linewidth = 2)
+trajectoire = plt.plot(pos_r, pos_z, color = 'r', linewidth = 2)[0]
 
 plt.xlabel('r (m)',fontsize='40')
 plt.ylabel('z (m)',fontsize='40')
 plt.xticks(fontsize='40')
 plt.yticks(fontsize='40')
 
+op.add_arrow(trajectoire,size=50)
 plt.show()
