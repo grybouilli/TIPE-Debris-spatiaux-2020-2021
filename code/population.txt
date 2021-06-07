@@ -1,7 +1,7 @@
 Population faite pour:
- r variant de -5. à 5., 
-et z allant de 1.5 à 6.5,
- avec un pas de 0.1,
+ r variant de 0.8 à 1.2, 
+et z allant de 2.9 à 3.3,
+ avec un pas de 0.05,
  une masse de 0.1, 
  tf = 200, 
  n = 600 
