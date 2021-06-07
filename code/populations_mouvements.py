@@ -30,13 +30,13 @@ def calcul_verlet_collision(m, alpha0, p0, tf, n,a_range=[-mag.a,mag.a],L_range=
 
     return 0
 
-r_init = np.arange(0.8, 1.2, 0.05)
-z_init = np.arange(2.9,3.3,0.05)
+r_init = np.arange(0.6, 1.2, 0.05)
+z_init = np.arange(2.8,3.4,0.05)
 
 nr,nz =len(r_init), len(z_init)
 
-file = open("/home/grybouilli/TIPE-Debris-spatiaux-2020-2021/code/population.txt","w")
-file.write("Population faite pour:\n r variant de -5. à 5., \net z allant de 1.5 à 6.5,\n avec un pas de 0.1,\n une masse de 0.1, \n tf = 200, \n n = 600 \n\n")
+file = open("/home/grybouilli/TIPE-Debris-spatiaux-2020-2021/code/population2.txt","w")
+file.write("Population faite pour:\n r variant de 0.6 à 1.2, \net z allant de 2.8 à 3.4,\n avec un pas de 0.1,\n une masse de 0.1, \n tf = 200, \n n = 600 \n\n")
 
 for r in r_init:
     for z in z_init:
