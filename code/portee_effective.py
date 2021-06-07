@@ -61,7 +61,6 @@ def cherche_pulsation():
 #Le temps de l'étude, dans lequel on considère l'angle constant
 t_app = cherche_pulsation()/10
 
-print(t_app)
 def compris(x, lim1, lim2):
     return x >= lim1 and x <= lim2
 
@@ -100,6 +99,34 @@ def trouve_capture(m, alpha0, p0, tf, n):
         T[k] = k*h
     return 0
 
+def trouve_capture1(m, alpha0, p0, tf, n,a_range=[-mag.a,mag.a],L_range=[-mag.L/2,mag.L/2]):
+    h = tf/n
+    rg, rb = -mag.a, mag.a   #limites en r de la moitie basse du solenoide
+    zb, zh = -mag.L/2, 0     #limites en z de la moitie basse du solenoide
+    V = np.zeros((n, n))
+    P = np.zeros((n, n))
+    P[0][0], P[1][0] = p0
+    T = np.zeros(n)
+    for k in range (1, n) :
+        a_r_n, a_z_n = mv.ac(m, P[0][k-1], P[1][k-1], T[k-1], alpha0)
+        
+        P[0][k] = P[0][k-1] + h*V[0][k-1] + ((h**2)/2)*a_r_n
+        P[1][k] = P[1][k-1] + h*V[1][k-1] + ((h**2)/2)*a_z_n
+        
+        if compris(P[0][k], rg, rb) and compris(P[1][k], zb, zh):
+            return 1
+        
+        T[k] = T[k-1] + h
+        
+        a_r_n1, a_z_n1 = mv.ac(m, P[0][k], P[1][k], T[k], alpha0)
+        V[0][k] = V[0][k-1] + (h/2)*(a_r_n + a_r_n1)
+        V[1][k] = V[1][k-1] + (h/2)*(a_z_n + a_z_n1)
+        if P[0][k] < a_range[0] or P[0][k] > a_range[1]:
+            if L_range[1] >= P[1][k] >= L_range[0]:
+                return 2
+
+    return 0
+
 #Création de la grille de tests : on teste que pour la moitié droite, et on copie à gauche ( symetrie du champ )
 r1, z1 = np.arange(0, 6.1, 1), np.arange(-6, 6.1, 1)
 r1, z1 = np.meshgrid(r1, z1)
@@ -114,7 +141,7 @@ def liste_points_cap():
 
     for i in range(len(r1)):
         for j in range(len(r1[0])):
-            a = trouve_capture(0.1, np.pi/3, (r1[i][j], z1[i][j]), t_app, int(int(t_app) * 1.5)) 
+            a = trouve_capture1(0.1, 0, (r1[i][j], z1[i][j]), t_app, int(int(t_app) * 1.5)) 
             if a == 1:
                 r_cap.append(r1[i][j])
                 z_cap.append(z1[i][j])
