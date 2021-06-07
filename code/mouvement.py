@@ -113,18 +113,14 @@ def verlet_avec_collision(m, alpha0, p0, tf, n,a_range=[-mag.a,mag.a],L_range=[-
         V[1][k] = V[1][k-1] + (h/2)*(a_z_n + a_z_n1)
         if P[0][k] < a_range[0] or P[0][k] > a_range[1]:
             if L_range[1] >= P[1][k] >= L_range[0]:
-                print("collision détectée à z =", P[1][k])
 
                 #---------- correction de l'effet fantôme ----------
-                print("r_av, z_av = ", P[0][k],P[1][k])
                 s = signe_de(P[0][k])
                 rp = - (s * a_range[0] + s * 10**-2)
                 dr = P[0][k] - P[0][k-1]
                 drp = rp - P[0][k-1]
                 dz = -(P[1][k] - P[1][k-1])
-                P[0][k],P[1][k] = rp , -((drp * dz / dr)  - P[1][k-1])
-
-                print("r_ap, z_ap = ", P[0][k],P[1][k])
+                P[0][k],P[1][k] = rp , -((drp * dz / dr)  - P[1][k-1]) #on corrige le point hors du solénoïde qui a causé la détection de la collision
                 # ---------------------------------------------------
                 collision =True
         if P[0][k] > r_lim or P[0][k] < -r_lim or P[1][k] > z_lim or P[1][k] < -z_lim:
@@ -169,30 +165,22 @@ axb.yaxis.set_ticks([])
 axb.quiver(r, z, U, V, alpha=0.5,color='grey')
 '''
 
-fig = plt.figure()
-ax = fig.add_subplot(111)
-ax.set_aspect('equal')
+def tracer_trajectoire(r_init,z_init, tf, n, sol_a=mag.a,sol_L=mag.L,graphe =plt.figure().gca()):
+    alpha_init = mag.Br(r_init,z_init)/mag.Bz(r_init,z_init)
+    pos_r, pos_z, vit_r, vit_z = verlet_avec_collision(0.1, alpha_init, (r_init, z_init), tf, n)
+    sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
 
-#Coords de depart :
-xd, yd = 1.5 , 3
+    graphe.plot(r_init, z_init, color = 'red', marker = '+', markersize = 12)
+    graphe.plot((np.zeros(len(sol[1])) + mag.a), sol[1], color = "b")
+    graphe.plot((np.zeros(len(sol[1])) - mag.a), sol[1], color = "b")
+    graphe.plot(sol[0], (np.zeros(len(sol[0])) + mag.L/2), color = "b")
+    graphe.plot(sol[0], (np.zeros(len(sol[0])) - mag.L/2), color = "b")
 
-alpha_init = mag.Br(xd,yd)/mag.Bz(xd,yd)
-print(alpha_init)
-pos_r, pos_z, vit_r, vit_z = verlet_avec_collision(0.1, alpha_init, (xd, yd), 200, 600)
-sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
+    trajectoire = graphe.plot(pos_r, pos_z, color = 'r', linewidth = 2)[0]
 
-plt.plot(xd, yd, color = 'red', marker = '+', markersize = 12)
-plt.plot((np.zeros(len(sol[1])) + mag.a), sol[1], color = "b")
-plt.plot((np.zeros(len(sol[1])) - mag.a), sol[1], color = "b")
-plt.plot(sol[0], (np.zeros(len(sol[0])) + mag.L/2), color = "b")
-plt.plot(sol[0], (np.zeros(len(sol[0])) - mag.L/2), color = "b")
+    plt.xlabel('r (m)',fontsize='40')
+    plt.ylabel('z (m)',fontsize='40')
+    plt.xticks(fontsize='40')
+    plt.yticks(fontsize='40')
 
-trajectoire = plt.plot(pos_r, pos_z, color = 'r', linewidth = 2)[0]
-
-plt.xlabel('r (m)',fontsize='40')
-plt.ylabel('z (m)',fontsize='40')
-plt.xticks(fontsize='40')
-plt.yticks(fontsize='40')
-
-op.add_arrow(trajectoire,size=50)
-plt.show()
+    op.add_arrow(trajectoire,size=50)
