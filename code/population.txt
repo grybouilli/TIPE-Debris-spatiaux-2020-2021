@@ -1,0 +1,16 @@
+Population faite pour:
+ r variant de -5. à 5., 
+et z allant de 1.5 à 6.5,
+ avec un pas de 0.1,
+ une masse de 0.1, 
+ tf = 200, 
+ n = 600 
+
+01110000
+11011000
+11110100
+11111110
+11111111
+11111111
+11111111
+11111111

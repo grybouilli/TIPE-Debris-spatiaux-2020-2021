@@ -12,7 +12,6 @@ ax.set_aspect('equal')
 xd, yd = 0.5 , 3
 
 alpha_init = mag.Br(xd,yd)/mag.Bz(xd,yd)
-print(alpha_init)
 pos_r, pos_z, vit_r, vit_z = mvt.verlet_avec_collision(0.1, alpha_init, (xd, yd), 200, 600)
 sol = (np.arange(-mag.a, mag.a + mag.a/10, (2*mag.a / 20)), np.arange(-mag.L/2, mag.L/2 + (mag.L/30), (mag.L/30)))
 
